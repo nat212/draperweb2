@@ -8,8 +8,8 @@ import {
 import { HomeComponent } from '@pages/home/home.component';
 import { LoginComponent } from '@pages/login/login.component';
 
-const requireLoggedIn = () => redirectUnauthorizedTo(['login']);
-const requireLoggedOut = () => redirectLoggedInTo(['home']);
+const requireLoggedIn = redirectUnauthorizedTo(['login']);
+const requireLoggedOut = redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

@@ -1,0 +1,9 @@
+<div
+  class="modal-backdrop fade show"
+  *ngIf="loader.enabled"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div class="spinner-border text-secondary" role="status"></div>
+  <p class="text-white" *ngIf="loader.text">{{ loader.text }}</p>
+</div>

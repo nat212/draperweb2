@@ -1,1 +1,36 @@
-<div class="page bg-primary"></div>
+<div class="page bg-primary" fxLayout="column" fxLayoutAlign="center center">
+  <div class="card">
+    <img class="card-img-top" src="assets/images/bushy.jpg" alt="Bushy" />
+    <div class="card-body">
+      <h5 class="card-title">DraperWeb</h5>
+      <form class="card-text" [formGroup]="loginForm" (submit)="login()">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+        </div>
+        <button
+          type="submit"
+          [disabled]="loginForm.invalid"
+          class="btn btn-secondary"
+          style="width: 100%"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

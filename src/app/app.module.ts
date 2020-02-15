@@ -12,9 +12,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { HomeComponent } from './pages/home/home.component';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from '@components/loader/loader.component';
+import { ToastContainerComponent } from './components/toast-container/toast-container.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, LoaderComponent, ToastContainerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,6 +30,8 @@ import { HomeComponent } from './pages/home/home.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthGuardModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
