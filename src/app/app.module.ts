@@ -23,6 +23,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from './components/icon/icon.component';
 import { UpdateService } from '@services/update.service';
+import { ConfirmComponent } from './dialogs/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UpdateService } from '@services/update.service';
     ToastContainerComponent,
     DashboardComponent,
     IconComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,
