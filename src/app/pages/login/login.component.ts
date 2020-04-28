@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private loader: LoaderService,
-    private toast: ToastService,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
     this.auth
       .login(email, password)
-      .then(res => {
-        this.router.navigate(['home']);
+      .then(() => {
+        this.router.navigate(['']);
       })
-      .catch(err => {
+      .catch((err) => {
         this.toast.show('Error logging in', err.message);
       })
       .finally(() => this.loader.hide());
