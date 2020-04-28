@@ -21,6 +21,9 @@
         },
         "@schematics/angular:directive": {
           "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -81,7 +84,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "draperweb2:build",
-            "port": 4201
+            "port": 4202
           },
           "configurations": {
             "production": {

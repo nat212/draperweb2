@@ -1,1 +1,45 @@
-<p>home works!</p>
+<nav
+  class="navbar navbar-expand-sm navbar-light bg-primary shadow-md fixed-top"
+  id="app-nav"
+>
+  <span class="navbar-brand">DraperWeb</span>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarContents"
+    aria-controls="navbarContents"
+    aria-expanded="false"
+    aria-label="Toggle Navigation"
+    (click)="menuCollapsed = !menuCollapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse"
+    id="navbarContents"
+    [ngbCollapse]="menuCollapsed"
+  >
+    <ul class="navbar-nav mr-auto">
+      <li
+        *ngFor="let item of navbarItems"
+        class="nav-item"
+        [class.active]="activePath === item.path"
+      >
+        <span class="nav-link" [routerLink]="item.path">{{ item.title }}</span>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span class="nav-link" (click)="logout()">
+          <dw-icon icon="sign-out"></dw-icon>
+          Logout
+        </span>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="page-contents">
+  <router-outlet></router-outlet>
+</div>

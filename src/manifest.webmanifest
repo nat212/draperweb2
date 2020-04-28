@@ -1,7 +1,7 @@
 {
-  "name": "draperweb2",
-  "short_name": "draperweb2",
-  "theme_color": "#1976d2",
+  "name": "DraperWeb 2 Beta",
+  "short_name": "DraperWeb 2 Beta",
+  "theme_color": "#00e07f",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
@@ -49,3 +49,4 @@
     }
   ]
 }
+
