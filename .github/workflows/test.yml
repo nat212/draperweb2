@@ -8,16 +8,6 @@ jobs:
     runs-on: self-hosted
     container:
       image: node:10
-
-    services:
-      postgres:
-        image: nat212/postgres-cron:latest
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: masterkey
-          POSTGRES_DB: mygc
-        ports:
-          - 5432:5432
     steps:
       - uses: actions/checkout@v1
       - name: Install dependencies
