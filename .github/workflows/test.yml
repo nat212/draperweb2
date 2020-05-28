@@ -6,10 +6,13 @@ on:
 jobs:
   test:
     runs-on: self-hosted
-    container:
-      image: node:10
     steps:
       - uses: actions/checkout@v1
+      - name: Install node
+        run: |
+          curl -L https://deb.nodesource.com/setup_10.x | sh -
+          apt install nodejs
+          npm i -g yarn
       - name: Install dependencies
         run: yarn install
       - name: Lint
