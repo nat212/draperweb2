@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "draperweb2"
+  "defaultProject": "draperweb2",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
