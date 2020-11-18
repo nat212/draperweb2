@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'dw-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'draperweb2';
-}
+export class AppComponent {}
