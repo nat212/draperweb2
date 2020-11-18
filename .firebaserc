@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "draperweb-2": {
+      "hosting": {
+        "draperweb2": [
+          "draperweb-2"
+        ]
+      }
+    }
+  }
+}
