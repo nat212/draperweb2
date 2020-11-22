@@ -1,1 +1,30 @@
-<p>home works!</p>
+<mat-drawer-container autosize class="app-drawer-container">
+  <mat-drawer mode="side" #drawer class="app-drawer" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+    <mat-toolbar class="mat-elevation-z2">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <button mat-icon-button type="button" (click)="drawer.close()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span>Menu</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-action-list>
+      <mat-list-item *ngFor="let link of links">
+        <mat-icon matListIcon>{{ link.icon }}</mat-icon>
+        <span matLine>{{ link.title }}</span>
+      </mat-list-item>
+    </mat-action-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar color="primary" class="app-toolbar">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <button mat-icon-button type="button" (click)="drawer.open()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <img class="logo" src="assets/images/bushy-transparent.png" alt="Bushy logo" />
+        <span>DraperWeb</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

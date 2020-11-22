@@ -1,0 +1,13 @@
+<div class="container" gdRows="auto!" gdColumns="auto" gdColumns.gt-xs="repeat(2, 1fr)" gdGap="24px">
+  <div
+    class="app-link"
+    *ngFor="let link of links"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="24px"
+    [routerLink]="link.path"
+  >
+    <mat-icon class="app-link-icon" [inline]="true">{{ link.icon }}</mat-icon>
+    <span class="app-link-text">{{ link.title }}</span>
+  </div>
+</div>

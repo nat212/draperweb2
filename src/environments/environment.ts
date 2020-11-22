@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: 'AIzaSyCgedakZReuyGfkrLM4pQaxK57BX6nd7BE',
-    authDomain: 'localhost:9099',
-    databaseURL: 'localhost:8282',
+    authDomain: 'draperweb-2.firebaseapp.com',
+    databaseURL: 'https://draperweb-2.firebaseio.com',
     projectId: 'draperweb-2',
     storageBucket: 'draperweb-2.appspot.com',
     messagingSenderId: '475657754543',
