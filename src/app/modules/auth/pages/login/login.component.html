@@ -1,10 +1,5 @@
 <div class="page" fxLayout="column" fxLayoutAlign="center center">
-  <form
-    [formGroup]="loginForm"
-    fxLayout="column"
-    fxLayoutAlign="start stretch"
-    fxLayoutGap="16x"
-  >
+  <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" (submit)="submit()">
     <mat-card class="login-card">
       <mat-card-header>
         <mat-card-title>DraperWeb</mat-card-title>
@@ -14,19 +9,18 @@
       <mat-card-content fxLayout="column" fxLayoutAlign="start stretch">
         <mat-form-field>
           <mat-label>Email Address</mat-label>
-          <input matInput type="email" autocomplete="email" name="email" />
+          <input matInput type="email" autocomplete="email" name="email" formControlName="email" />
+          <mat-error></mat-error>
+          <mat-icon matPrefix>email</mat-icon>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            autocomplete="current-password"
-            name="password"
-          />
+          <input matInput type="password" autocomplete="current-password" name="password" formControlName="password" />
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error></mat-error>
         </mat-form-field>
       </mat-card-content>
     </mat-card>
-    <button mat-raised-button type="button" color="primary">Sign In</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Sign In</button>
   </form>
 </div>

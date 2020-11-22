@@ -116,6 +116,17 @@
     rxjs "6.6.3"
     source-map "0.7.3"
 
+"@angular-devkit/core@11.0.2":
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-11.0.2.tgz#dd3475912e830740e71e14e3168d609e8ddef8c6"
+  integrity sha512-vUmmUNmNM9oRcDmt0PunU/ayglo0apq4pGL9Z5jj6alf2WwEiTcGHjyuZSDIO9MOLi41519jp3mDx79qXvvyww==
+  dependencies:
+    ajv "6.12.6"
+    fast-json-stable-stringify "2.1.0"
+    magic-string "0.25.7"
+    rxjs "6.6.3"
+    source-map "0.7.3"
+
 "@angular-devkit/core@7.3.10", "@angular-devkit/core@^7.3.6":
   version "7.3.10"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.3.10.tgz#35f34b54de35c7b3ffec37dd9bc88e369ebc29ea"
@@ -133,6 +144,15 @@
   integrity sha512-rAOnAndcybEH398xf5wzmcUPCoCi0dKiOo/+1dkKU5aTxynw1OUnANt5K6A+ZZTGnJmfjtP0ovkZGYun9IUDxQ==
   dependencies:
     "@angular-devkit/core" "11.0.1"
+    ora "5.1.0"
+    rxjs "6.6.3"
+
+"@angular-devkit/schematics@11.0.2":
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-11.0.2.tgz#b5aa914d7e91d92b4eeadb7aed3b5228497abbf3"
+  integrity sha512-unNewc+Y9ofrdKxXNoSHKUL6wvV8Vgh2nJMTLI1VAw8nfqgWphI+s5XwbVzog65nhZ10xJeaUm9u5R8pxLDpQg==
+  dependencies:
+    "@angular-devkit/core" "11.0.2"
     ora "5.1.0"
     rxjs "6.6.3"
 
@@ -238,10 +258,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/fire@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-6.1.0.tgz#1082c0a57178ce67d36a7c4cfb0633129bbac01c"
-  integrity sha512-YDuLB6/J8XOuOEB0nuG0gQ+xuFnx0n58GwExR9VacDqTDkSO93zlu2zT7nhtNttVOrpblNAbpTQe87Rlu7HBpA==
+"@angular/fire@^6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-6.1.1.tgz#61adaeb8988d5be43fca92471cd8b0ff4fed4833"
+  integrity sha512-61DZz26ikDl2+YpFOTndKcR9TjeWnFGMv1q1Mn0Xe/kDF7gYvhkq7i05W/wiMx2854pzsLvuyxqaG9V1y/5ttA==
   dependencies:
     tslib "^2.0.0"
 
@@ -280,10 +300,27 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/pwa@^0.1100.2":
+  version "0.1100.2"
+  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.1100.2.tgz#c1416801af37268307e4a55e8027aff838b46fa9"
+  integrity sha512-V+IZ68KTddLmuBDKp8JlBLjSJ9kul5xm1oT2RzKdnp39k6AWtdbmgodb86bKIECtLyOkgFWPL7qWMSL0v2kUYg==
+  dependencies:
+    "@angular-devkit/core" "11.0.2"
+    "@angular-devkit/schematics" "11.0.2"
+    "@schematics/angular" "11.0.2"
+    parse5-html-rewriting-stream "6.0.1"
+
 "@angular/router@~11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-11.0.0.tgz#59e855b0d34c4578e0556e181f2f28048fb0d5a8"
   integrity sha512-10ZeobfK3HqVeWS6zjdKU16ccxFtdCHkxT11bnFg3Jwq9vKt+LI5KitAkCI5rYTY3DRfVzasRkqBzZfZMkbftw==
+  dependencies:
+    tslib "^2.0.0"
+
+"@angular/service-worker@~11.0.0":
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-11.0.2.tgz#93b266e263d9e1c89b6587d176d9b6302f996a46"
+  integrity sha512-Npj+2lUoDkiSPs1VnPaHvwAyKXW2qjArAFBK3dltLTxFtjIbpSN82uP8PKajkXme8Kj40dyS4PHi2pvzQ8x3YA==
   dependencies:
     tslib "^2.0.0"
 
@@ -1167,13 +1204,12 @@
   dependencies:
     tslib "^1.9.0"
 
-"@datorama/akita@4.22.0":
-  version "4.22.0"
-  resolved "https://registry.yarnpkg.com/@datorama/akita/-/akita-4.22.0.tgz#ed25577e83600c17e975cc0318cab0d359627f6b"
-  integrity sha512-0Bki8TncWM0fueQ6WeKsjUg+t9QV1S+2OvvIyBL97cRAYPjiJmrdjDrGUY6UKWarrlyXCtPGW+e46B0jv2Ml0g==
+"@datorama/akita@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@datorama/akita/-/akita-5.2.5.tgz#969a64d149d903bd15bd9b15ff9734ea61748016"
+  integrity sha512-CvIQqG9b7TF0c7L0Yz2Qemu25u42bpTBG4aBa699QDNG9rrfgzKbO6wOelqLOHrIHvqHeYHgtnni05Ii3ks0rg==
   dependencies:
     schematics-utilities "^1.1.1"
-    tslib "^1.9.0"
 
 "@firebase/analytics-types@0.4.0":
   version "0.4.0"
@@ -1235,21 +1271,21 @@
     "@firebase/util" "0.3.4"
     tslib "^1.11.1"
 
-"@firebase/database-types@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@firebase/database-types/-/database-types-0.6.0.tgz#7795bc6b1db93f4cbda9a241c8dfe1bb86033dc6"
-  integrity sha512-ljpU7/uboCGqFSe9CNgwd3+Xu5N8YCunzfPpeueuj2vjnmmypUi4QWxgC3UKtGbuv1q+crjeudZGLxnUoO0h7w==
+"@firebase/database-types@0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@firebase/database-types/-/database-types-0.6.1.tgz#cf1cfc03e617ed4c2561703781f85ba4c707ff65"
+  integrity sha512-JtL3FUbWG+bM59iYuphfx9WOu2Mzf0OZNaqWiQ7lJR8wBe7bS9rIm9jlBFtksB7xcya1lZSQPA/GAy2jIlMIkA==
   dependencies:
     "@firebase/app-types" "0.6.1"
 
-"@firebase/database@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.7.1.tgz#900d2e6ed734249e65e5f159293830e4f4285d6e"
-  integrity sha512-8j3KwksaYMSbIsEjOIarZD3vj4jGJjIlLGIAiO/4P4XyOtrlnxIiH7G0UdIZlcvKU4Gsgg0nthT2+EapROmHWA==
+"@firebase/database@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.8.1.tgz#a7bc1c01052d35817a242c21bfe09ab29ee485a3"
+  integrity sha512-/1HhR4ejpqUaM9Cn3KSeNdQvdlehWIhdfTVWFxS73ZlLYf7ayk9jITwH10H3ZOIm5yNzxF67p/U7Z/0IPhgWaQ==
   dependencies:
     "@firebase/auth-interop-types" "0.1.5"
     "@firebase/component" "0.1.21"
-    "@firebase/database-types" "0.6.0"
+    "@firebase/database-types" "0.6.1"
     "@firebase/logger" "0.2.6"
     "@firebase/util" "0.3.4"
     faye-websocket "0.11.3"
@@ -1260,16 +1296,16 @@
   resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-2.0.0.tgz#1f6212553b240f1a8905bb8dcf1f87769138c5c0"
   integrity sha512-ZGb7p1SSQJP0Z+kc9GAUi+Fx5rJatFddBrS1ikkayW+QHfSIz0omU23OgSHcBGTxe8dJCeKiKA2Yf+tkDKO/LA==
 
-"@firebase/firestore@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-2.0.2.tgz#300e7430a08d8c8779471e43c892a2cefe405b62"
-  integrity sha512-6kO/vWUmTOANA/ql+i16DFMc63gamU76Nycyt7k0r8QfcdXu93Cwizw4ff4DNMnpnkAJkTk36fPAxBxEvBXkzw==
+"@firebase/firestore@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-2.0.4.tgz#c4be6f3540f607fd8e200cfba83c4997c29447fe"
+  integrity sha512-fzJKj/4h4jOwPSfHB42XBJIC0zsPsepU6FcBO+8nSx7G2IPfTw8cMgSNin2gPqX6tR1w1NQtHiSlXiRKsbMZdA==
   dependencies:
     "@firebase/component" "0.1.21"
     "@firebase/firestore-types" "2.0.0"
     "@firebase/logger" "0.2.6"
     "@firebase/util" "0.3.4"
-    "@firebase/webchannel-wrapper" "0.4.0"
+    "@firebase/webchannel-wrapper" "0.4.1"
     "@grpc/grpc-js" "^1.0.0"
     "@grpc/proto-loader" "^0.5.0"
     node-fetch "2.6.1"
@@ -1394,10 +1430,10 @@
   dependencies:
     tslib "^1.11.1"
 
-"@firebase/webchannel-wrapper@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.4.0.tgz#becce788818d3f47f0ac1a74c3c061ac1dcf4f6d"
-  integrity sha512-8cUA/mg0S+BxIZ72TdZRsXKBP5n5uRcE3k29TZhZw6oIiHBt9JA7CTb/4pE1uKtE/q5NeTY2tBDcagoZ+1zjXQ==
+"@firebase/webchannel-wrapper@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.4.1.tgz#600f2275ff54739ad5ac0102f1467b8963cd5f71"
+  integrity sha512-0yPjzuzGMkW1GkrC8yWsiN7vt1OzkMIi9HgxRmKREZl2wnNPOKo/yScTjXf/O57HM8dltqxPF6jlNLFVtc2qdw==
 
 "@google-cloud/paginator@^2.0.0":
   version "2.0.3"
@@ -1494,6 +1530,13 @@
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@jsdevtools/ono/-/ono-7.1.3.tgz#9df03bbd7c696a5c58885c34aa06da41c8543796"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
+
+"@ngneat/forms-manager@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/forms-manager/-/forms-manager-2.3.0.tgz#154f671c1ef2a8a4df591c5aa396eae63fa17f52"
+  integrity sha512-ivei8rh3a2B+Q5ABrSm/u3nIf2PbqophMToKOU9/1RCjywJPNuuior5O4L4SHj57ceOe5ty1o2p7te0CF7975Q==
+  dependencies:
+    tslib "^1.10.0"
 
 "@ngtools/webpack@11.0.1":
   version "11.0.1"
@@ -1592,6 +1635,15 @@
   dependencies:
     "@angular-devkit/core" "11.0.1"
     "@angular-devkit/schematics" "11.0.1"
+    jsonc-parser "2.3.1"
+
+"@schematics/angular@11.0.2":
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-11.0.2.tgz#63041d1931fe2d56135d730a6e43937a3eef4bab"
+  integrity sha512-tUIuCYJUzHYuiXGJ2KCuwxMocS56kPHaM8+neVYWwWbOxKzLZXv80gMm/pIWxrqUDCkIUi3yb4ienudFhgQLYg==
+  dependencies:
+    "@angular-devkit/core" "11.0.2"
+    "@angular-devkit/schematics" "11.0.2"
     jsonc-parser "2.3.1"
 
 "@schematics/update@0.1100.1":
@@ -1993,12 +2045,12 @@ ajv@6.9.1:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-akita-ng-fire@^1.0.0:
-  version "1.5.13"
-  resolved "https://registry.yarnpkg.com/akita-ng-fire/-/akita-ng-fire-1.5.13.tgz#400f71cb8cd13f21e9cd396a0fc783ce96416580"
-  integrity sha512-8JWdqg+uOVQhNsaLSq/7kTIFOo1u2mOJQemOXJPpZuGpVaLjYNKpaumQSmR8UaHrm0eUWgTsaUJc8A5NIpZSrA==
+akita-ng-fire@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/akita-ng-fire/-/akita-ng-fire-4.0.1.tgz#ea34a2d57ea0929e6b1c4b6207bee51fb32e3f53"
+  integrity sha512-W3MYueWsZYUl1ZYm1R22WV9AAyDd1GDehWkbbAkngQiZcqj0Bh3vGsMagDR8ONWY2FGfYddqjq3n68u/UJkN6g==
   dependencies:
-    tslib "^1.9.0"
+    tslib "^2.0.0"
 
 alphanum-sort@^1.0.0:
   version "1.0.2"
@@ -4984,17 +5036,17 @@ firebase-tools@^8.0.0:
     winston "^3.0.0"
     ws "^7.2.3"
 
-"firebase@^7.0.0 || ^8.0.0":
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/firebase/-/firebase-8.0.2.tgz#7bc8a220ce6b206121c4a9740eca1ad4be23ff86"
-  integrity sha512-tPtXQ8sifo82f7bOxYcR/yEdJ4IbL4/fpQrophRHFAaYCsYGp2Q/c1zz0voX9cLap8MH2uwh5LIVBqZ8nyT5ZQ==
+firebase@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/firebase/-/firebase-8.1.1.tgz#379094b724053931fda1086e9020a17b578e50d5"
+  integrity sha512-w1plr2jYvzBkx/rHE6A0EJf9318ufA5omShLuGocPlQtrvphel+KJcd+R02outE5E2lSDhyM0l3EoiA0YCD4hA==
   dependencies:
     "@firebase/analytics" "0.6.2"
     "@firebase/app" "0.6.13"
     "@firebase/app-types" "0.6.1"
     "@firebase/auth" "0.15.2"
-    "@firebase/database" "0.7.1"
-    "@firebase/firestore" "2.0.2"
+    "@firebase/database" "0.8.1"
+    "@firebase/firestore" "2.0.4"
     "@firebase/functions" "0.6.1"
     "@firebase/installations" "0.4.19"
     "@firebase/messaging" "0.7.3"
