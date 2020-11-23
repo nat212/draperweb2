@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Injectable, Type } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { MessageDialogComponent, MessageDialogData } from '../dialogs/message-dialog/message-dialog.component';
 
 @Injectable({
@@ -10,6 +11,16 @@ export class AlertService {
 
   public messageDialog(title: string, message: string) {
     const data: MessageDialogData = { title, message };
-    return this.matDialog.open(MessageDialogComponent, { maxWidth: '280px', data }).afterClosed();
+    return this.openDialog(this.matDialog, MessageDialogComponent, data);
+  }
+
+  public openDialog<T, U = any>(
+    dialog: MatDialog,
+    component: Type<any>,
+    data: U = null,
+    options: MatDialogConfig = { maxWidth: '320px' },
+  ): Observable<T> {
+    const config: MatDialogConfig = { ...options, data };
+    return dialog.open(component, config).afterClosed();
   }
 }

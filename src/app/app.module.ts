@@ -3,7 +3,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS } from '@angular/fire/firestore';
 import { FlexLayoutModule, GridModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +27,7 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule.forRoot(),
     BrowserAnimationsModule,
+    MatNativeDateModule,
     FlexLayoutModule,
     GridModule,
     AngularFireModule.initializeApp(environment.firebase),

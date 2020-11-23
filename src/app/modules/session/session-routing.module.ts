@@ -9,8 +9,7 @@ const routes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' },
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent, data: { title: 'Home' } },
       {
         path: 'budgets',
         loadChildren: () => import('@modules/budgets/budgets.module').then((m) => m.BudgetsModule),

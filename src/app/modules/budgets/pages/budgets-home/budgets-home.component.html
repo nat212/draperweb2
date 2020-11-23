@@ -1,0 +1,6 @@
+<button mat-raised-button color="primary" (click)="addBudget()">Add Budget</button>
+<form [formGroup]="filterForm">
+  <mat-chip-list formControlName="years" [selectable]="true" [multiple]="true">
+    <mat-chip color="accent" *ngFor="let year of years$ | async" [value]="year" [selectable]="true">{{ year }}</mat-chip>
+  </mat-chip-list>
+</form>

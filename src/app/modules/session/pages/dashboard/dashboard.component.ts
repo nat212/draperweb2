@@ -13,7 +13,7 @@ interface Link {
 })
 export class DashboardComponent {
   public links: Link[] = [
-    { icon: 'request_quote', title: 'Budgets', path: '../budgets' },
-    { icon: 'card_giftcard', title: 'Wishlists', path: '../wishlists' },
+    { icon: 'request_quote', title: 'Budgets', path: 'budgets' },
+    { icon: 'card_giftcard', title: 'Wishlists', path: 'wishlists' },
   ];
 }
