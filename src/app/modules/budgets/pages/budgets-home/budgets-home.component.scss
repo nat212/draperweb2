@@ -1,0 +1,47 @@
+@import '~@angular/flex-layout/mq';
+@import '~@angular/material/theming';
+
+.container {
+  height: 100%;
+}
+
+.filter-form {
+  @include layout-bp(gt-sm) {
+    padding-top: 24px;
+  }
+  padding: 16px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+
+.contents {
+  overflow-y: auto;
+}
+
+.budgets-container {
+  padding: 16px;
+}
+
+.budget-card {
+  @include mat-elevation(4);
+  @include mat-elevation-transition;
+  &:hover {
+    @include mat-elevation(6);
+  }
+  border-radius: 16px;
+  padding: 24px;
+  user-select: none;
+  cursor: pointer;
+
+  .budget-card-header {
+    text-align: center;
+  }
+
+  .hyphen {
+    text-align: center;
+  }
+}

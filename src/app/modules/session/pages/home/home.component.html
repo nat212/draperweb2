@@ -15,7 +15,7 @@
       </mat-list-item>
     </mat-action-list>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="app-drawer-content" fxLayout="column" fxLayoutAlign="start stretch">
     <mat-toolbar color="primary" class="app-toolbar">
       <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <button mat-icon-button type="button" (click)="drawer.open()">
@@ -25,6 +25,8 @@
         <span>DraperWeb</span>
       </mat-toolbar-row>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="app-contents" fxFlex="1 1 auto">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -12,9 +12,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
-  declarations: [HomeComponent, DashboardComponent],
+  declarations: [HomeComponent, DashboardComponent, BreadcrumbsComponent],
   imports: [
     CommonModule,
     SessionRoutingModule,

@@ -1,0 +1,15 @@
+<mat-chip-list
+  [aria-orientation]="orientation"
+  [class.mat-chip-list-stacked]="orientation === 'vertical'"
+  [multiple]="true"
+  [selectable]="true"
+>
+  <mat-chip
+    *ngFor="let chip of chips"
+    [selected]="chipSelected(chip)"
+    [value]="chip"
+    (click)="chipSelected(chip) ? onChipDeselect(chip) : onChipSelect(chip)"
+  >
+    {{ chip }}
+  </mat-chip>
+</mat-chip-list>

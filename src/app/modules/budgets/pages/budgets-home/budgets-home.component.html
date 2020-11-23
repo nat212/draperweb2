@@ -1,6 +1,62 @@
-<button mat-raised-button color="primary" (click)="addBudget()">Add Budget</button>
-<form [formGroup]="filterForm">
-  <mat-chip-list formControlName="years" [selectable]="true" [multiple]="true">
-    <mat-chip color="accent" *ngFor="let year of years$ | async" [value]="year" [selectable]="true">{{ year }}</mat-chip>
-  </mat-chip-list>
-</form>
+<div class="container" gdRows="min-content!" gdColumns.lt-md="auto" gdColumns.gt-sm="1fr 3fr">
+  <form [formGroup]="filterForm" class="filter-form" fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput type="text" name="budget-filter-search" formControlName="name" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Filters</mat-panel-title>
+      </mat-expansion-panel-header>
+      <dw-chip-filter-list [chips]="years$ | async" formControlName="years"></dw-chip-filter-list>
+      <mat-action-row>
+        <button mat-flat-button color="primary" type="button" (click)="filterForm.reset()">
+          <mat-icon>close</mat-icon>
+          Clear
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </form>
+  <div class="contents">
+    <div
+      class="budgets-container"
+      *ngIf="budgets$ | async as budgets"
+      gdRows="min-content!"
+      gdColumns="auto"
+      gdColumns.gt-sm="repeat(2, 1fr)"
+      gdColumns.gt-md="repeat(3, 1fr)"
+      gdColumns.gt-lg="repeat(4, 1fr)"
+      gdGap="16px"
+    >
+      <ng-container *ngIf="budgets.length; else empty">
+        <div class="budget-card" *ngFor="let budget of budgets" fxLayout="column" fxLayoutAlign="start stretch">
+          <h2 class="budget-card-header">{{ budget.name }}</h2>
+          <div class="budget-card-details" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="date-block" fxLayout="column" fxLayoutAlign="start center" fxFlex="1 1 1fr">
+              <b>Begins:</b>
+              <span *ngIf="budget.startDate">
+                {{ budget.startDate | date }}
+              </span>
+              <span *ngIf="!budget.startDate">N/A</span>
+            </div>
+            <span class="hyphen" fxFlex="1 1 1fr">&mdash;</span>
+            <div class="date-block" fxLayout="column" fxLayoutAlign="start center" fxFlex="1 1 1fr">
+              <b>Ends:</b>
+              <span *ngIf="budget.endDate">
+                {{ budget.endDate | date }}
+              </span>
+              <span *ngIf="!budget.endDate">N/A</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #empty>
+        <h2>There are no budgets</h2>
+      </ng-template>
+    </div>
+  </div>
+  <button mat-fab color="accent" type="button" (click)="addBudget()" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

@@ -1,7 +1,7 @@
 export interface BudgetForms {
   budgetFilter: {
     name: string;
-    years: number[];
+    years: (number | string)[];
     undated: boolean;
   };
 }

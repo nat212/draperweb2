@@ -10,7 +10,7 @@
           "style": "scss"
         },
         "@datorama/akita:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "root": "",
