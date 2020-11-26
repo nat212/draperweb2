@@ -1,0 +1,16 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
+  <ng-container *ngIf="columns$ | async as columns">
+    <ng-container *ngIf="columns.length; else empty"></ng-container>
+    <ng-template #empty>
+      <h2>There are no columns in this budget</h2>
+      <button mat-raised-button type="button" color="primary">
+        <mat-icon>download</mat-icon>
+        Import Columns
+      </button>
+      <button mat-raised-button type="button" color="accent">
+        <mat-icon>add</mat-icon>
+        Add Column
+      </button>
+    </ng-template>
+  </ng-container>
+</div>

@@ -9,7 +9,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-action-list>
-      <mat-list-item *ngFor="let link of links">
+      <mat-list-item *ngFor="let link of links" [routerLink]="link.path">
         <mat-icon matListIcon>{{ link.icon }}</mat-icon>
         <span matLine>{{ link.title }}</span>
       </mat-list-item>

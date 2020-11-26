@@ -30,7 +30,7 @@
       gdGap="16px"
     >
       <ng-container *ngIf="budgets.length; else empty">
-        <div class="budget-card" *ngFor="let budget of budgets" fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="budget-card" *ngFor="let budget of budgets" fxLayout="column" fxLayoutAlign="start stretch" [routerLink]="[budget.id]">
           <h2 class="budget-card-header">{{ budget.name }}</h2>
           <div class="budget-card-details" fxLayout="row" fxLayoutAlign="space-between center">
             <div class="date-block" fxLayout="column" fxLayoutAlign="start center" fxFlex="1 1 1fr">

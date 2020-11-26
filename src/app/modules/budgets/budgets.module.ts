@@ -15,9 +15,11 @@ import { SharedModule } from '@modules/shared/shared.module';
 import { BudgetsRoutingModule } from './budgets-routing.module';
 import { NewBudgetComponent } from './dialogs/new-budget/new-budget.component';
 import { BudgetsHomeComponent } from './pages/budgets-home/budgets-home.component';
+import { ViewBudgetComponent } from './pages/view-budget/view-budget.component';
+import { CreateColumnComponent } from './dialogs/create-column/create-column.component';
 
 @NgModule({
-  declarations: [BudgetsHomeComponent, NewBudgetComponent],
+  declarations: [BudgetsHomeComponent, NewBudgetComponent, ViewBudgetComponent, CreateColumnComponent],
   imports: [
     CommonModule,
     BudgetsRoutingModule,

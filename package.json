@@ -30,6 +30,7 @@
     "@ngneat/forms-manager": "^2.3.0",
     "akita-ng-fire": "^4.0.1",
     "firebase": "^8.1.1",
+    "fuse.js": "^6.4.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

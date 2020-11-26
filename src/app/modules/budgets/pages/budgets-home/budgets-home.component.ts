@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewBudgetComponent } from '@modules/budgets/dialogs/new-budget/new-budget.component';
 import { BudgetForms } from '@modules/budgets/forms';
 import { Budget } from '@modules/budgets/state/budget/budget.model';
@@ -9,8 +10,9 @@ import { BudgetQuery } from '@modules/budgets/state/budget/budget.query';
 import { BudgetService } from '@modules/budgets/state/budget/budget.service';
 import { NgFormsManager } from '@ngneat/forms-manager';
 import { AlertService } from '@services/alert.service';
-import { Observable, Subject } from 'rxjs';
-import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import Fuse from 'fuse.js';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { debounceTime, filter, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'dw-budgets-home',
@@ -32,6 +34,8 @@ export class BudgetsHomeComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService,
     private readonly matDialog: MatDialog,
     private readonly mediaObserver: MediaObserver,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
   ) {}
 
   public ngOnInit() {
@@ -42,9 +46,22 @@ export class BudgetsHomeComponent implements OnInit, OnDestroy {
       years: [[]],
     });
     this.formManager.upsert('budgetFilter', this.filterForm, { persistState: true });
-    this.budgets$ = this.formManager
+    const filteredBudgets$ = this.formManager
       .valueChanges('budgetFilter', 'years')
       .pipe(switchMap((years) => this.budgetQuery.filterByYears(years)));
+
+    const budgetFuse$ = filteredBudgets$.pipe(
+      map((budgets) => {
+        const opts: Fuse.IFuseOptions<Budget> = { keys: ['name', 'startDate', 'endDate'] };
+        const index = Fuse.createIndex(opts.keys, budgets);
+        return new Fuse(budgets, opts, index);
+      }),
+    );
+    this.budgets$ = combineLatest([
+      budgetFuse$,
+      filteredBudgets$,
+      this.formManager.valueChanges('budgetFilter', 'name').pipe(startWith(this.filterForm.value.name || ''), debounceTime(500)),
+    ]).pipe(map(([budgetsFuse, budgets, searchTerm]) => (searchTerm ? budgetsFuse.search(searchTerm).map((i) => i.item) : budgets)));
 
     this.mobile$ = this.mediaObserver.asObservable().pipe(
       map((mediaChanges) => mediaChanges.map((m) => m.mqAlias)),
