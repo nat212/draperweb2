@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WishlistsRoutingModule } from './wishlists-routing.module';
+import { WishlistsHomeComponent } from './pages/wishlists-home/wishlists-home.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [WishlistsHomeComponent],
   imports: [
     CommonModule,
     WishlistsRoutingModule
