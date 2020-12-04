@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.add-button {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
+
+.container {
+  padding: 16px;
+}
+
+.wishlist-card {
+  @include mat-elevation(2);
+  @include mat-elevation-transition;
+  &:hover {
+    @include mat-elevation(4);
+  }
+  padding: 16px;
+  border-radius: 8px;
+  user-select: none;
+  cursor: pointer;
+
+  .wishlist-title {
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .wishlist-shared {
+    padding: 4px 8px;
+    border-radius: 16px;
+    background-color: var(--accent-lighter-colour);
+    color: var(--accent-lighter-text-colour);
+  }
+
+  .items-number,
+  .amount-number {
+    color: var(--primary-colour);
+    font-weight: 500;
+  }
+}

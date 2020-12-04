@@ -4,4 +4,5 @@ export interface Wishlist {
   userName: string;
   name: string;
   shared: boolean;
+  items?: any[];
 }

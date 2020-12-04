@@ -43,6 +43,19 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  --primary-colour: #{mat-color($draperweb2-primary, default)};
+  --primary-darker-colour: #{mat-color($draperweb2-primary, darker)};
+  --primary-lighter-colour: #{mat-color($draperweb2-primary, lighter)};
+  --primary-text-colour: #{mat-color($draperweb2-primary, default-contrast)};
+  --primary-darker-text-colour: #{mat-color($draperweb2-primary, darker-contrast)};
+  --primary-lighter-text-colour: #{mat-color($draperweb2-primary, lighter-contrast)};
+
+  --accent-colour: #{mat-color($draperweb2-accent, default)};
+  --accent-darker-colour: #{mat-color($draperweb2-accent, darker)};
+  --accent-lighter-colour: #{mat-color($draperweb2-accent, lighter)};
+  --accent-text-colour: #{mat-color($draperweb2-accent, default-contrast)};
+  --accent-darker-text-colour: #{mat-color($draperweb2-accent, darker-contrast)};
+  --accent-lighter-text-colour: #{mat-color($draperweb2-accent, lighter-contrast)};
 }
 
 // Custom material components styling

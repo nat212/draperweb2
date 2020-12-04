@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ editing ? 'Edit' : 'New' }} Wishlist</h1>
+<div mat-dialog-content [formGroup]="wishlistForm" fxLayout="column" fxLayoutGap="8px">
+  <mat-checkbox formControlName="shared">Shared wishlist</mat-checkbox>
+  <mat-form-field>
+    <mat-label>Wishlist Name</mat-label>
+    <input matInput type="text" name="wishlist-name" formControlName="name" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button type="button" mat-dialog-close>Cancel</button>
+  <button mat-button type="button" color="primary" [mat-dialog-close]="wishlistForm.value" [disabled]="wishlistForm.invalid">Submit</button>
+</div>
