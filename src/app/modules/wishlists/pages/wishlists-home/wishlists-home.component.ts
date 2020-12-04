@@ -18,7 +18,6 @@ export class WishlistsHomeComponent implements OnInit {
   public wishlists$: Observable<Wishlist[]>;
   public filterForm: FormGroup;
   private userId: string;
-  private userName: string;
 
   constructor(
     private readonly auth: AuthQuery,
@@ -37,10 +36,12 @@ export class WishlistsHomeComponent implements OnInit {
 
     this.wishlists$ = this.query.selectAll();
     this.wishlists$.subscribe(console.log);
-    this.auth.profile$.pipe(first((profile) => !!profile)).subscribe((profile) => {
-      this.userId = profile.uid;
-      this.userName = profile.displayName;
-    });
+    this.auth.profile$
+      .pipe(
+        first((profile) => !!profile),
+        pluck('uid'),
+      )
+      .subscribe((uid: string) => (this.userId = uid));
   }
 
   public addWishlist() {
@@ -49,7 +50,7 @@ export class WishlistsHomeComponent implements OnInit {
       .afterClosed()
       .pipe(filter((value) => !!value))
       .subscribe(({ name, shared }) => {
-        this.service.add({ name, shared, userId: this.userId, userName: this.userName });
+        this.service.add({ name, shared, userId: this.userId });
       });
   }
 }

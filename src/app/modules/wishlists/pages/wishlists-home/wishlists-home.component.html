@@ -1,26 +1,43 @@
-<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
-  <div class="wishlist-card" *ngFor="let wishlist of wishlists$ | async" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
-    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
-      <span class="wishlist-title" fxFlex="1 1 auto">{{ wishlist.name }}</span>
-      <span class="wishlist-shared" *ngIf="wishlist.shared">Shared</span>
+<div
+  class="container"
+  gdRows="1fr!"
+  gdColumns="auto"
+  gdColumns.gt-sm="repeat(min(2, {{ wishlists.length || 1 }}), 1fr)"
+  gdColumns.gt-md="repeat(min(3, {{ wishlists.length || 1 }}), 1fr)"
+  gdGap="8px"
+  *ngIf="wishlists$ | async as wishlists"
+>
+  <ng-container *ngIf="wishlists.length; else empty">
+    <div class="wishlist-card" *ngFor="let wishlist of wishlists" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+        <span class="wishlist-title" fxFlex="1 1 auto">{{ wishlist.name }}</span>
+        <span class="wishlist-shared" *ngIf="wishlist.shared">Shared</span>
+      </div>
+      <span class="wishlist-user">{{ wishlist.user?.displayName }}</span>
+      <span class="wishlist-details" fxLayout="row" fxLayoutAlign="start stretch">
+        <span class="wishlist-items">
+          <span class="items-number">
+            {{ 0 }}
+          </span>
+          items
+        </span>
+        <span fxFlex="1 1 auto"></span>
+        <span class="wishlist-amount">
+          <span class="amount-number">
+            {{ 0 | currency: 'ZAR':'symbol-narrow' }}
+          </span>
+          total
+        </span>
+      </span>
     </div>
-    <span class="wishlist-user">{{ wishlist.userName }}</span>
-    <span class="wishlist-details" fxLayout="row" fxLayoutAlign="start stretch">
-      <span class="wishlist-items">
-        <span class="items-number">
-          {{ 0 }}
-        </span>
-        items
-      </span>
-      <span fxFlex="1 1 auto"></span>
-      <span class="wishlist-amount">
-        <span class="amount-number">
-          {{ 0 | currency: 'ZAR':'symbol-narrow' }}
-        </span>
-        total
-      </span>
-    </span>
-  </div>
+  </ng-container>
+  <ng-template #empty>
+    <h2>There are no wishlists yet</h2>
+    <button mat-raised-button color="accent" (click)="addWishlist()">
+      <mat-icon>add</mat-icon>
+      Add Wishlist
+    </button>
+  </ng-template>
 </div>
 <button mat-fab color="accent" type="button" class="add-button" (click)="addWishlist()">
   <mat-icon>add</mat-icon>

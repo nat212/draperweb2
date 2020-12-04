@@ -8,6 +8,9 @@ const wishlistQuery: Query<Wishlist> = {
   items: (wishlist: Wishlist) => ({
     path: `wishlists/${wishlist.id}/items`,
   }),
+  user: (wishlist: Wishlist) => ({
+    path: `users/${wishlist.userId}`,
+  }),
 };
 
 @Injectable({ providedIn: 'root' })
