@@ -23,6 +23,10 @@
         </button>
         <img class="logo" src="assets/images/bushy-transparent.png" alt="Bushy logo" />
         <span>DraperWeb</span>
+        <span fxFlex="1 1 auto"></span>
+        <button mat-icon-button *ngIf="update.updateAvailable$ | async" (click)="update.activateUpdate()" type="button">
+          <mat-icon>system_update</mat-icon>
+        </button>
       </mat-toolbar-row>
     </mat-toolbar>
     <div class="app-contents" fxFlex="1 1 auto">

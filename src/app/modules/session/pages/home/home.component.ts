@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UpdateService } from '@services/update.service';
 
 interface Link {
   icon: string;
@@ -16,4 +17,6 @@ export class HomeComponent {
     { icon: 'request_quote', title: 'Budgets', path: 'budgets' },
     { icon: 'card_giftcard', title: 'Wishlists', path: 'wishlists' },
   ];
+
+  constructor(public update: UpdateService) {}
 }
