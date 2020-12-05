@@ -1,3 +1,48 @@
-<button mat-fab color="accent" type="button" class="add-button" (click)="addWishlistItem()">
-  <mat-icon>add</mat-icon>
-</button>
+<div class="page" gdColumns="auto" gdColumns.gt-md="1fr 3fr" gdRows="auto!" gdGap="24px">
+  <div class="filter" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="filterForm" fxLayoutGap="4px">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput type="text" name="wishlist-item-filter" formControlName="search" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Filters</mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <dw-chip-filter-list formControlName="brands" [chips]="brands$ | async"></dw-chip-filter-list>
+      </div>
+    </mat-expansion-panel>
+    <mat-divider fxHide.gt-md></mat-divider>
+  </div>
+  <ng-container *ngIf="items$ | async as items">
+    <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="items.length; else empty">
+      <div class="wishlist-item" *ngFor="let item of items" fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="row" fxLayoutGap="8px">
+          <span class="wishlist-item-name">{{ item.name }}</span>
+          <span class="wishlist-item-brand" *ngIf="item.brand">({{ item.brand }})</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <span class="amount" *ngIf="item.amount">
+            {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
+          </span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <a mat-icon-button class="action-button" *ngIf="item.link" [href]="item.link" target="_blank"><mat-icon>link</mat-icon></a>
+          <button mat-icon-button class="action-button" type="button" (click)="editWishlistItem(item)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button type="button" color="warn" (click)="deleteWishlistItem(item)"><mat-icon>delete</mat-icon></button>
+        </div>
+      </div>
+    </div>
+    <ng-template #empty>
+      <div style="padding: 16px">
+        <h2>There are no wishlist items yet</h2>
+        <button mat-raised-button color="accent" type="button" (click)="addWishlistItem()">
+          <mat-icon>add</mat-icon>
+          Add Wishlist Item
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+  <button mat-fab color="accent" type="button" class="add-button" (click)="addWishlistItem()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

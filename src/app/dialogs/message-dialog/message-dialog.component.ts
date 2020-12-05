@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface MessageDialogData {
   title: string;
   message: string;
+  confirm?: boolean;
 }
 
 @Component({

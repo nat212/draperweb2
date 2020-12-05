@@ -9,8 +9,8 @@ import { MessageDialogComponent, MessageDialogData } from '../dialogs/message-di
 export class AlertService {
   constructor(private readonly matDialog: MatDialog) {}
 
-  public messageDialog(title: string, message: string) {
-    const data: MessageDialogData = { title, message };
+  public messageDialog(title: string, message: string, confirm = false): Observable<boolean> {
+    const data: MessageDialogData = { title, message, confirm };
     return this.openDialog(this.matDialog, MessageDialogComponent, data);
   }
 

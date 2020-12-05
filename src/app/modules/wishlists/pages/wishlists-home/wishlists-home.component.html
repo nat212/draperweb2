@@ -21,7 +21,7 @@
         <span class="wishlist-shared" *ngIf="wishlist.shared">Shared</span>
       </div>
       <span class="wishlist-user">{{ wishlist.user?.displayName }}</span>
-      <span class="wishlist-details" fxLayout="row" fxLayoutAlign="start stretch">
+      <span class="wishlist-details" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <span class="wishlist-items">
           <span class="items-number">
             {{ getWishlistItemsNumber(wishlist) }}

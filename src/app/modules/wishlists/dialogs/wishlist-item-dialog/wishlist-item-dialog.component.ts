@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface WishlistItemData {
@@ -19,11 +19,27 @@ export class WishlistItemDialogComponent implements OnInit {
 
   constructor(private readonly formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) private data: WishlistItemData) {}
 
+  private urlValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control?.value) {
+        return null;
+      } else {
+        let url: URL;
+        try {
+          url = new URL(control.value);
+        } catch (_) {
+          return { url: true };
+        }
+        return url.protocol === 'http:' || url.protocol === 'https:' ? null : { url: true };
+      }
+    };
+  }
+
   public ngOnInit(): void {
     this.wishlistItemForm = this.formBuilder.group({
       name: ['', Validators.required],
-      amount: [null],
-      link: [''],
+      amount: [null, Validators.min(1)],
+      link: ['', this.urlValidator()],
       brand: [''],
     });
     this.wishlistItemForm.patchValue(this.data || {});

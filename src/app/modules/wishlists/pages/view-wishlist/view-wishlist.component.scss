@@ -1,5 +1,58 @@
+@import '~@angular/material/theming';
+@import '~@angular/flex-layout/mq';
+
+.page {
+  position: relative;
+  height: 100%;
+}
+
 .add-button {
   position: fixed;
   bottom: 16px;
   right: 16px;
+}
+
+.container {
+  padding: 16px;
+  @include layout-bp(gt-md) {
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+  }
+}
+
+.wishlist-item {
+  @include mat-elevation(2);
+
+  padding: 16px;
+  border-radius: 8px;
+  min-width: 280px;
+  user-select: none;
+
+  .wishlist-item-name {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .amount {
+    color: var(--primary-colour);
+  }
+
+  .action-button {
+    transition: color 0.25s;
+    &:hover {
+      color: var(--accent-colour);
+    }
+  }
+}
+
+.filter {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  z-index: 1;
+  padding: 16px 16px 0;
+  mat-divider {
+    margin: 8px -16px 0;
+  }
 }

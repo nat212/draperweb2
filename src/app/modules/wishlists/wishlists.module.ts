@@ -6,14 +6,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '@modules/shared/shared.module';
 import { NewWishlistComponent } from './dialogs/new-wishlist/new-wishlist.component';
+import { WishlistItemDialogComponent } from './dialogs/wishlist-item-dialog/wishlist-item-dialog.component';
+import { ViewWishlistComponent } from './pages/view-wishlist/view-wishlist.component';
 import { WishlistsHomeComponent } from './pages/wishlists-home/wishlists-home.component';
 import { WishlistsRoutingModule } from './wishlists-routing.module';
-import { ViewWishlistComponent } from './pages/view-wishlist/view-wishlist.component';
-import { WishlistItemDialogComponent } from './dialogs/wishlist-item-dialog/wishlist-item-dialog.component';
 
 @NgModule({
   declarations: [WishlistsHomeComponent, NewWishlistComponent, ViewWishlistComponent, WishlistItemDialogComponent],
@@ -29,6 +32,9 @@ import { WishlistItemDialogComponent } from './dialogs/wishlist-item-dialog/wish
     MatInputModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatExpansionModule,
+    SharedModule,
+    MatDividerModule,
   ],
   entryComponents: [NewWishlistComponent],
 })
