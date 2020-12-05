@@ -53,4 +53,12 @@ export class WishlistsHomeComponent implements OnInit {
         this.service.add({ name, shared, userId: this.userId });
       });
   }
+
+  public getWishlistAmount(wishlist: Wishlist) {
+    return (wishlist.items || []).reduce((curr, i) => (i.amount ?? 0) + curr, 0);
+  }
+
+  public getWishlistItemsNumber(wishlist: Wishlist) {
+    return wishlist.items?.length ?? 0;
+  }
 }

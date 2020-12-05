@@ -12,9 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { NewWishlistComponent } from './dialogs/new-wishlist/new-wishlist.component';
 import { WishlistsHomeComponent } from './pages/wishlists-home/wishlists-home.component';
 import { WishlistsRoutingModule } from './wishlists-routing.module';
+import { ViewWishlistComponent } from './pages/view-wishlist/view-wishlist.component';
+import { WishlistItemDialogComponent } from './dialogs/wishlist-item-dialog/wishlist-item-dialog.component';
 
 @NgModule({
-  declarations: [WishlistsHomeComponent, NewWishlistComponent],
+  declarations: [WishlistsHomeComponent, NewWishlistComponent, ViewWishlistComponent, WishlistItemDialogComponent],
   imports: [
     CommonModule,
     WishlistsRoutingModule,

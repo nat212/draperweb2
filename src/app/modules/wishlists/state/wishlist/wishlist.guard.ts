@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
 import { CollectionGuard } from 'akita-ng-fire';
 import { WishlistService } from './wishlist.service';
 import { WishlistState } from './wishlist.store';
@@ -10,7 +9,7 @@ export class WishlistGuard extends CollectionGuard<WishlistState> {
     super(service);
   }
 
-  public sync(next: ActivatedRouteSnapshot) {
+  public sync() {
     return this.service.syncQuery();
   }
 }
