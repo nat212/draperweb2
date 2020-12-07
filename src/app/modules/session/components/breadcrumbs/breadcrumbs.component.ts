@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-export interface Crumb {
+interface Crumb {
   label: string;
-  path?: string;
+  url: string;
 }
 
 @Component({

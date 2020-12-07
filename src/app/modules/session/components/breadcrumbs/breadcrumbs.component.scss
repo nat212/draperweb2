@@ -1,3 +1,22 @@
-:host {
-  display: block;
+@import '~@angular/material/theming';
+@import '~@angular/flex-layout/mq';
+
+.crumbs-toolbar {
+  border-radius: 0 0 24px 24px;
+  @include mat-elevation(4);
+  z-index: 5;
+  position: relative;
+
+  .crumb {
+    user-select: none;
+    cursor: pointer;
+    &:not(:last-child):hover {
+      text-decoration: underline;
+    }
+    font-size: 18px;
+
+    @include layout-bp(lt-md) {
+      font-size: 16px;
+    }
+  }
 }

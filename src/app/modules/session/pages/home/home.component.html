@@ -29,6 +29,7 @@
         </button>
       </mat-toolbar-row>
     </mat-toolbar>
+    <dw-breadcrumbs *ngIf="breadcrumbs$ | async as crumbs" [crumbs]="crumbs"></dw-breadcrumbs>
     <div class="app-contents" fxFlex="1 1 auto">
       <router-outlet></router-outlet>
     </div>

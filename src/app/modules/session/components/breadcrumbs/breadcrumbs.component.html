@@ -1,3 +1,8 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row></mat-toolbar-row>
+<mat-toolbar color="accent" class="crumbs-toolbar">
+  <ng-container *ngFor="let crumb of crumbs; let last = last">
+    <span class="crumb" [routerLink]="crumb.url">
+      {{ crumb.label }}
+    </span>
+    <mat-icon *ngIf="!last">chevron_right</mat-icon>
+  </ng-container>
 </mat-toolbar>

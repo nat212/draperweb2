@@ -16,6 +16,14 @@
   .logo {
     max-height: 100%;
   }
+
+  .crumb {
+    user-select: none;
+    cursor: pointer;
+    &:not(.last):hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .app-drawer-content {

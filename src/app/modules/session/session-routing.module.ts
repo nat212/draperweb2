@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: { title: 'Home' },
+    data: { title: 'Home', breadcrumb: 'Home' },
     canActivate: [AuthGuard],
     canDeactivate: [AuthGuard],
     children: [
@@ -16,10 +16,12 @@ const routes: Routes = [
       {
         path: 'budgets',
         loadChildren: () => import('@modules/budgets/budgets.module').then((m) => m.BudgetsModule),
+        data: { breadcrumb: 'Budgets' },
       },
       {
         path: 'wishlists',
         loadChildren: () => import('@modules/wishlists/wishlists.module').then((m) => m.WishlistsModule),
+        data: { breadcrumb: 'Wishlists' },
       },
     ],
   },
