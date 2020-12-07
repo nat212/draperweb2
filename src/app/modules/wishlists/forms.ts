@@ -5,4 +5,9 @@ export interface WishlistForms {
     amountTo: number;
     brands: string[];
   };
+  wishlistsFilter: {
+    search: string;
+    users: string[];
+    shared: boolean;
+  };
 }

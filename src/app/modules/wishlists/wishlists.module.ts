@@ -11,15 +11,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { SharedModule } from '@modules/shared/shared.module';
-import { NewWishlistComponent } from './dialogs/new-wishlist/new-wishlist.component';
+import { WishlistDialogComponent } from './dialogs/wishlist-dialog/wishlist-dialog.component';
 import { WishlistItemDialogComponent } from './dialogs/wishlist-item-dialog/wishlist-item-dialog.component';
 import { ViewWishlistComponent } from './pages/view-wishlist/view-wishlist.component';
 import { WishlistsHomeComponent } from './pages/wishlists-home/wishlists-home.component';
 import { WishlistsRoutingModule } from './wishlists-routing.module';
 
 @NgModule({
-  declarations: [WishlistsHomeComponent, NewWishlistComponent, ViewWishlistComponent, WishlistItemDialogComponent],
+  declarations: [WishlistsHomeComponent, WishlistDialogComponent, ViewWishlistComponent, WishlistItemDialogComponent],
   imports: [
     CommonModule,
     WishlistsRoutingModule,
@@ -35,7 +36,8 @@ import { WishlistsRoutingModule } from './wishlists-routing.module';
     MatExpansionModule,
     SharedModule,
     MatDividerModule,
+    MatMenuModule,
   ],
-  entryComponents: [NewWishlistComponent],
+  entryComponents: [WishlistDialogComponent],
 })
 export class WishlistsModule {}

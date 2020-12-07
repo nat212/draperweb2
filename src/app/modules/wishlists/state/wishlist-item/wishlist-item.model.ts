@@ -4,4 +4,5 @@ export interface WishlistItem {
   link?: string;
   brand?: string;
   amount?: number;
+  completed?: boolean;
 }

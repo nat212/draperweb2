@@ -56,6 +56,8 @@ body {
   --accent-text-colour: #{mat-color($draperweb2-accent, default-contrast)};
   --accent-darker-text-colour: #{mat-color($draperweb2-accent, darker-contrast)};
   --accent-lighter-text-colour: #{mat-color($draperweb2-accent, lighter-contrast)};
+
+  --background-colour: #fafafa;
 }
 
 // Custom material components styling

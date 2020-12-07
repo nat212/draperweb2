@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { preventEventBubble } from '@helpers/prevent-bubble.helper';
 import { WishlistItemDialogComponent } from '@modules/wishlists/dialogs/wishlist-item-dialog/wishlist-item-dialog.component';
 import { WishlistForms } from '@modules/wishlists/forms';
 import { WishlistItem } from '@modules/wishlists/state/wishlist-item/wishlist-item.model';
@@ -11,7 +12,7 @@ import { NgFormsManager } from '@ngneat/forms-manager';
 import { AlertService } from '@services/alert.service';
 import Fuse from 'fuse.js';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, pluck, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'dw-view-wishlist',
@@ -21,6 +22,8 @@ import { debounceTime, distinctUntilChanged, filter, map, pluck, switchMap, take
 export class ViewWishlistComponent implements OnInit, OnDestroy {
   private wishlistId: string;
   public items$: Observable<WishlistItem[]>;
+  public completeItems$: Observable<WishlistItem[]>;
+  public incompleteItems$: Observable<WishlistItem[]>;
   public filterForm: FormGroup;
   public brands$: Observable<string[]>;
   private fuseOpts: Fuse.IFuseOptions<WishlistItem> = { keys: ['name', 'brand', 'link'] };
@@ -81,6 +84,9 @@ export class ViewWishlistComponent implements OnInit, OnDestroy {
       this.formManager.valueChanges('itemsFilter', 'search').pipe(distinctUntilChanged(), debounceTime(500)),
     ]).pipe(map(([{ fuse, items }, searchTerm]) => (searchTerm ? fuse.search(searchTerm).map((i) => i.item) : items)));
 
+    this.completeItems$ = this.items$.pipe(map((items) => items.filter((i) => !!i.completed)));
+    this.incompleteItems$ = this.items$.pipe(map((items) => items.filter((i) => !i.completed)));
+
     this.brands$ = this.query.brands$;
 
     this.routerQuery.selectParams('wishlistId').subscribe((wishlistId: string) => (this.wishlistId = wishlistId));
@@ -119,5 +125,13 @@ export class ViewWishlistComponent implements OnInit, OnDestroy {
   public getUrlDomain(item: WishlistItem) {
     const url = new URL(item.link);
     return url.hostname;
+  }
+
+  public preventBubble(event: MouseEvent) {
+    preventEventBubble(event);
+  }
+
+  public toggleItemCompletion(item: WishlistItem) {
+    this.service.update(item.id, { completed: !item.completed }, { params: { wishlistId: this.wishlistId } });
   }
 }

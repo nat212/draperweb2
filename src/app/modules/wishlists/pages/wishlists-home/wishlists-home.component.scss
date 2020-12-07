@@ -1,10 +1,15 @@
 @import '~@angular/material/theming';
 @import 'mixins';
 
-:host {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+.filter {
+  position: sticky;
+  top: 0;
+  padding: 16px 16px 0;
+  background-color: var(--background-colour);
+  z-index: 1;
+  mat-divider {
+    margin: 8px -16px 0;
+  }
 }
 
 .add-button {

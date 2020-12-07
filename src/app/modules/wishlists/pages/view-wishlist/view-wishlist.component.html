@@ -1,4 +1,4 @@
-<div class="page" gdColumns="auto" gdColumns.gt-md="1fr 3fr" gdRows="min-content!" gdGap="24px">
+<div class="page" gdColumns="auto" gdColumns.gt-md="1fr 3fr" gdRows="min-content!">
   <div class="filter" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="filterForm" fxLayoutGap="4px">
     <mat-form-field>
       <mat-label>Search</mat-label>
@@ -11,26 +11,21 @@
         <dw-chip-filter-list formControlName="brands" [chips]="brands$ | async"></dw-chip-filter-list>
       </div>
     </mat-expansion-panel>
-    <mat-divider fxHide.gt-md></mat-divider>
   </div>
   <ng-container *ngIf="items$ | async as items">
     <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="items.length; else empty">
-      <div class="wishlist-item" *ngFor="let item of items" fxLayout="column" fxLayoutAlign="start stretch">
-        <div fxLayout="row" fxLayoutGap="8px">
-          <span class="wishlist-item-name">{{ item.name }}</span>
-          <span class="wishlist-item-brand" *ngIf="item.brand">({{ item.brand }})</span>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <span class="amount" *ngIf="item.amount">
-            {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
-          </span>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
-          <a mat-icon-button class="action-button" *ngIf="item.link" [href]="item.link" target="_blank"><mat-icon>link</mat-icon></a>
-          <button mat-icon-button class="action-button" type="button" (click)="editWishlistItem(item)"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button type="button" color="warn" (click)="deleteWishlistItem(item)"><mat-icon>delete</mat-icon></button>
-        </div>
-      </div>
+      <ng-container *ngFor="let item of incompleteItems$ | async">
+        <ng-container *ngTemplateOutlet="itemCard; context: { item: item }"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="completeItems$ | async as completeItems">
+        <ng-container *ngIf="completeItems.length">
+          <h3 class="complete-header">Completed</h3>
+          <mat-divider></mat-divider>
+        </ng-container>
+        <ng-container *ngFor="let item of completeItems">
+          <ng-container *ngTemplateOutlet="itemCard; context: { item: item }"></ng-container>
+        </ng-container>
+      </ng-container>
     </div>
     <ng-template #empty>
       <div style="padding: 16px">
@@ -46,3 +41,33 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
+<ng-template #itemCard let-item="item">
+  <div class="wishlist-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <mat-checkbox [checked]="!!item.completed" (click)="toggleItemCompletion(item)"></mat-checkbox>
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex="1 1 auto">
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+        <span class="wishlist-item-name">{{ item.name }}</span>
+        <span class="wishlist-item-brand" *ngIf="item.brand">({{ item.brand }})</span>
+        <span fxFlex="1 1 auto"></span>
+        <mat-menu #menu>
+          <button mat-menu-item type="button" (click)="editWishlistItem(item)">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button mat-menu-item type="button" (click)="deleteWishlistItem(item)">
+            <mat-icon color="warn">delete</mat-icon>
+            Delete
+          </button>
+        </mat-menu>
+        <button mat-icon-button type="button" [matMenuTriggerFor]="menu" (click)="preventBubble($event)">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" *ngIf="item.amount">
+        <span class="amount">
+          {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</ng-template>

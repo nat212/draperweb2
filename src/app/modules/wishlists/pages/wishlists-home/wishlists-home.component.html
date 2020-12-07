@@ -1,51 +1,82 @@
-<div
-  class="container"
-  gdRows="1fr!"
-  gdColumns="auto"
-  gdColumns.gt-sm="repeat(min(2, {{ wishlists.length || 1 }}), 1fr)"
-  gdColumns.gt-md="repeat(min(3, {{ wishlists.length || 1 }}), 1fr)"
-  gdGap="8px"
-  *ngIf="wishlists$ | async as wishlists"
->
-  <ng-container *ngIf="wishlists.length; else empty">
-    <div
-      class="wishlist-card"
-      *ngFor="let wishlist of wishlists"
-      fxLayout="column"
-      fxLayoutAlign="start stretch"
-      fxLayoutGap="8px"
-      [routerLink]="wishlist.id"
-    >
-      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
-        <span class="wishlist-title" fxFlex="1 1 auto">{{ wishlist.name }}</span>
-        <span class="wishlist-shared" *ngIf="wishlist.shared">Shared</span>
+<div class="page" gdRows="auto!" gdColumns="auto" gdColumns.gt-sm="1fr 3fr">
+  <div class="filter" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="filterForm">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput type="text" name="wishlist-search" formControlName="search" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Filter</mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutGap="8px">
+        <dw-chip-filter-list [chips]="users$ | async" formControlName="users"></dw-chip-filter-list>
+        <mat-checkbox formControlName="shared">Shared</mat-checkbox>
       </div>
-      <span class="wishlist-user">{{ wishlist.user?.displayName }}</span>
-      <span class="wishlist-details" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <span class="wishlist-items">
-          <span class="items-number">
-            {{ getWishlistItemsNumber(wishlist) }}
+    </mat-expansion-panel>
+  </div>
+  <div
+    class="container"
+    gdRows="min-content!"
+    gdColumns="auto"
+    gdColumns.gt-sm="repeat(2, auto)"
+    gdColumns.gt-md="repeat(3, auto)"
+    gdGap="8px"
+    *ngIf="wishlists$ | async as wishlists"
+  >
+    <ng-container *ngIf="wishlists.length; else empty">
+      <div
+        class="wishlist-card"
+        *ngFor="let wishlist of wishlists"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="8px"
+        [routerLink]="wishlist.id"
+      >
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+          <span class="wishlist-title" fxFlex="1 1 auto">{{ wishlist.name }}</span>
+          <span class="wishlist-shared" *ngIf="wishlist.shared">Shared</span>
+          <mat-menu #menu>
+            <button mat-menu-item type="button" (click)="editWishlist(wishlist)">
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+            <button mat-menu-item type="button" (click)="deleteWishlist(wishlist)">
+              <mat-icon color="warn">delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="menu" type="button" (click)="preventEventBubble($event)">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+        <span class="wishlist-user">{{ wishlist.user?.displayName }}</span>
+        <span class="wishlist-details" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <span class="wishlist-items">
+            <span class="items-number">
+              {{ getWishlistItemsNumber(wishlist) }}
+            </span>
+            items
           </span>
-          items
-        </span>
-        <span fxFlex="1 1 auto"></span>
-        <span class="wishlist-amount">
-          <span class="amount-number">
-            {{ getWishlistAmount(wishlist) | currency: 'ZAR':'symbol-narrow' }}
+          <span fxFlex="1 1 auto"></span>
+          <span class="wishlist-amount">
+            <span class="amount-number">
+              {{ getWishlistAmount(wishlist) | currency: 'ZAR':'symbol-narrow' }}
+            </span>
+            total
           </span>
-          total
         </span>
-      </span>
-    </div>
-  </ng-container>
-  <ng-template #empty>
-    <h2>There are no wishlists yet</h2>
-    <button mat-raised-button color="accent" (click)="addWishlist()">
-      <mat-icon>add</mat-icon>
-      Add Wishlist
-    </button>
-  </ng-template>
+      </div>
+    </ng-container>
+    <ng-template #empty>
+      <div>
+        <h2>There are no wishlists yet</h2>
+        <button mat-raised-button color="accent" (click)="addWishlist()">
+          <mat-icon>add</mat-icon>
+          Add Wishlist
+        </button>
+      </div>
+    </ng-template>
+  </div>
+  <button mat-fab color="accent" type="button" class="add-button" (click)="addWishlist()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
-<button mat-fab color="accent" type="button" class="add-button" (click)="addWishlist()">
-  <mat-icon>add</mat-icon>
-</button>

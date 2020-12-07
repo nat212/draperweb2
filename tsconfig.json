@@ -16,7 +16,8 @@
     "paths": {
       "@modules/*": ["src/app/modules/*"],
       "@services/*": ["src/app/services/*"],
-      "@components/*": ["src/app/components/*"]
+      "@components/*": ["src/app/components/*"],
+      "@helpers/*": ["src/helpers/*"]
     }
   }
 }
