@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from '@modules/shared/shared.module';
 import { WishlistDialogComponent } from './dialogs/wishlist-dialog/wishlist-dialog.component';
 import { WishlistItemDialogComponent } from './dialogs/wishlist-item-dialog/wishlist-item-dialog.component';
@@ -37,6 +38,7 @@ import { WishlistsRoutingModule } from './wishlists-routing.module';
     SharedModule,
     MatDividerModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
   ],
   entryComponents: [WishlistDialogComponent],
 })
