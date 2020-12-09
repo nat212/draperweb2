@@ -23,10 +23,7 @@
       class="budgets-container"
       *ngIf="budgets$ | async as budgets"
       gdRows="min-content!"
-      gdColumns="auto"
-      gdColumns.gt-sm="repeat(2, 1fr)"
-      gdColumns.gt-md="repeat(3, 1fr)"
-      gdColumns.gt-lg="repeat(4, 1fr)"
+      gdColumns="repeat(auto-fill, minmax(300px, 1fr))"
       gdGap="16px"
     >
       <ng-container *ngIf="budgets.length; else empty">

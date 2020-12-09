@@ -48,3 +48,4 @@ Thumbs.db
 firestore-data/
 ./scripts/emulator-admin-firebase.js
 firebase-data/
+.firebase/

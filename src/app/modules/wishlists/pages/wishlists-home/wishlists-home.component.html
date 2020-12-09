@@ -16,9 +16,7 @@
   <div
     class="container"
     gdRows="min-content!"
-    gdColumns="auto"
-    gdColumns.gt-sm="repeat(2, auto)"
-    gdColumns.gt-md="repeat(3, auto)"
+    gdColumns="repeat(auto-fill, minmax(200px, 1fr))"
     gdGap="8px"
     *ngIf="wishlists$ | async as wishlists; else loading"
   >
