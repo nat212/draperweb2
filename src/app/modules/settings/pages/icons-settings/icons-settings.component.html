@@ -36,7 +36,14 @@
     </mat-expansion-panel>
     <mat-divider></mat-divider>
   </div>
-  <div class="icons-container" fxLayout="row wrap" fxLayoutAlign="start start" *ngIf="icons$ | async as icons" fxLayoutGap="16px">
+  <div
+    class="icons-container"
+    fxLayout="row wrap"
+    fxLayoutAlign="start start"
+    fxLayoutAlign.xs="center start"
+    *ngIf="icons$ | async as icons"
+    fxLayoutGap="16px"
+  >
     <ng-container *ngIf="icons.length; else empty">
       <div class="icon-card" *ngFor="let icon of icons" fxLayout="column" fxLayoutAlign="center center">
         <button mat-icon-button class="delete-button" type="button" color="warn" (click)="deleteIcon(icon)">
