@@ -38,11 +38,10 @@
   </div>
   <div
     class="icons-container"
-    fxLayout="row wrap"
-    fxLayoutAlign="start start"
-    fxLayoutAlign.xs="center start"
+    gdColumns="repeat(auto-fill, minmax(100px, 1fr))"
+    gdRows="min-content!"
     *ngIf="icons$ | async as icons"
-    fxLayoutGap="16px"
+    gdGap="16px"
   >
     <ng-container *ngIf="icons.length; else empty">
       <div class="icon-card" *ngFor="let icon of icons" fxLayout="column" fxLayoutAlign="center center">
@@ -50,7 +49,7 @@
           <mat-icon>delete</mat-icon>
         </button>
         <mat-icon>{{ icon.icon }}</mat-icon>
-        <span>{{ icon.name }}</span>
+        <span class="name">{{ icon.name }}</span>
       </div>
     </ng-container>
     <ng-template #empty>

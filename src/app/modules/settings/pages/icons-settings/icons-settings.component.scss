@@ -32,6 +32,12 @@
     top: 0;
     right: 0;
   }
+
+  .name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+  }
 }
 
 .icons-container {
