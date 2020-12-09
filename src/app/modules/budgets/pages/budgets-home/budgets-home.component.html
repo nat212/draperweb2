@@ -32,6 +32,10 @@
       <ng-container *ngIf="budgets.length; else empty">
         <div class="budget-card" *ngFor="let budget of budgets" fxLayout="column" fxLayoutAlign="start stretch" [routerLink]="[budget.id]">
           <h2 class="budget-card-header">{{ budget.name }}</h2>
+          <span class="budget-card-column">
+            <span class="count">{{ budget.columns?.length || 0 }}</span>
+            columns
+          </span>
           <div class="budget-card-details" fxLayout="row" fxLayoutAlign="space-between center">
             <div class="date-block" fxLayout="column" fxLayoutAlign="start center" fxFlex="1 1 1fr">
               <b>Begins:</b>

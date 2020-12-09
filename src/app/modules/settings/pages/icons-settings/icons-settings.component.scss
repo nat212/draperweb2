@@ -1,0 +1,35 @@
+@import '~@angular/material/theming';
+@import 'mixins';
+
+.add-icon-panel {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 16px;
+  background-color: #fafafa;
+
+  mat-divider {
+    margin: 0 -16px -16px;
+  }
+
+  mat-icon.invisible {
+    opacity: 0;
+  }
+}
+
+.icon-card {
+  padding: 24px 32px;
+  border-radius: 16px;
+  position: relative;
+  @include mat-elevation(1);
+
+  > mat-icon {
+    @include icon-scale(32px);
+  }
+
+  .delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

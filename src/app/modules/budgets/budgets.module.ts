@@ -11,12 +11,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { SharedModule } from '@modules/shared/shared.module';
 import { BudgetsRoutingModule } from './budgets-routing.module';
+import { CreateColumnComponent } from './dialogs/create-column/create-column.component';
 import { NewBudgetComponent } from './dialogs/new-budget/new-budget.component';
 import { BudgetsHomeComponent } from './pages/budgets-home/budgets-home.component';
 import { ViewBudgetComponent } from './pages/view-budget/view-budget.component';
-import { CreateColumnComponent } from './dialogs/create-column/create-column.component';
 
 @NgModule({
   declarations: [BudgetsHomeComponent, NewBudgetComponent, ViewBudgetComponent, CreateColumnComponent],
@@ -35,6 +36,7 @@ import { CreateColumnComponent } from './dialogs/create-column/create-column.com
     SharedModule,
     MatListModule,
     MatExpansionModule,
+    MatMenuModule,
   ],
   entryComponents: [NewBudgetComponent],
 })

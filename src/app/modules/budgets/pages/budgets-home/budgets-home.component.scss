@@ -44,4 +44,13 @@
   .hyphen {
     text-align: center;
   }
+
+  .budget-card-column {
+    text-align: center;
+    margin-bottom: 4px;
+    .count {
+      color: var(--primary-darker-colour);
+      font-weight: 500;
+    }
+  }
 }

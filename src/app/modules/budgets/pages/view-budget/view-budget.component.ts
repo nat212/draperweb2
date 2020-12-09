@@ -37,11 +37,22 @@ export class ViewBudgetComponent implements OnInit, OnDestroy {
   }
 
   public createColumn() {
-    this.alert
-      .openDialog<string>(this.dialog, CreateColumnComponent)
+    this.dialog
+      .open(CreateColumnComponent)
+      .afterClosed()
       .pipe(filter((val) => !!val))
       .subscribe((name) => {
         this.columnService.add({ name }, { params: { budgetId: this.budgetId } });
+      });
+  }
+
+  public deleteColumn(column: BudgetColumn) {
+    this.alert
+      .messageDialog('Delete Column', `Are you sure you wish to delete ${column.name}? This operation cannot be undone.`, true)
+      .subscribe((result) => {
+        if (result) {
+          this.columnService.remove(column.id, { params: { budgetId: this.budgetId } });
+        }
       });
   }
 }

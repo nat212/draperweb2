@@ -17,6 +17,9 @@ $draperweb2-accent: mat-palette($mat-green);
 // The warn palette is optional (defaults to red).
 $draperweb2-warn: mat-palette($mat-red);
 
+// Success palette
+$draperweb2-success: mat-palette($mat-green);
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $draperweb2-theme: mat-light-theme(
@@ -56,6 +59,13 @@ body {
   --accent-text-colour: #{mat-color($draperweb2-accent, default-contrast)};
   --accent-darker-text-colour: #{mat-color($draperweb2-accent, darker-contrast)};
   --accent-lighter-text-colour: #{mat-color($draperweb2-accent, lighter-contrast)};
+
+  --success-colour: #{mat-color($draperweb2-success, default)};
+  --success-darker-colour: #{mat-color($draperweb2-success, darker)};
+  --success-lighter-colour: #{mat-color($draperweb2-success, lighter)};
+  --success-text-colour: #{mat-color($draperweb2-success, default-contrast)};
+  --success-darker-text-colour: #{mat-color($draperweb2-success, darker-contrast)};
+  --success-lighter-text-colour: #{mat-color($draperweb2-success, lighter-contrast)};
 
   --background-colour: #fafafa;
 }

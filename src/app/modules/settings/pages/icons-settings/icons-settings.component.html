@@ -1,0 +1,60 @@
+<div
+  class="container"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="16px"
+  fxLayout.gt-md="row"
+  fxLayoutAlign.gt-md="start start"
+>
+  <div class="add-icon-panel" fxLayout="column" fxLayoutAlign="start center">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>Add Icon</mat-expansion-panel-header>
+      <form
+        class="add-icon-form"
+        [formGroup]="newIconForm"
+        (submit)="addIcon()"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="8px"
+      >
+        <mat-form-field>
+          <mat-icon matPrefix>edit</mat-icon>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" name="icon-name" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon matPrefix [class.invisible]="!isValidIcon(newIconForm.value.icon)">
+            {{ isValidIcon(newIconForm.value.icon) ? newIconForm.value.icon : 'cancel' }}
+          </mat-icon>
+          <mat-label>Icon Codepoint</mat-label>
+          <input matInput type="text" name="icon-codepoint" formControlName="icon" [matAutocomplete]="autocomplete" />
+          <mat-autocomplete #autocomplete="matAutocomplete" [autoActiveFirstOption]="true">
+            <mat-option *ngFor="let cp of codepoints$ | async" [value]="cp">
+              <mat-icon>{{ cp }}</mat-icon>
+              {{ cp }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit" [disabled]="newIconForm.invalid">
+          <mat-icon>add</mat-icon>
+          Add
+        </button>
+      </form>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="icons-container" fxLayout="row wrap" fxLayoutAlign="start start" *ngIf="icons$ | async as icons" fxLayoutGap="16px">
+    <ng-container *ngIf="icons.length; else empty">
+      <div class="icon-card" *ngFor="let icon of icons" fxLayout="column" fxLayoutAlign="center center">
+        <button mat-icon-button class="delete-button" type="button" color="warn" (click)="deleteIcon(icon)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-icon>{{ icon.icon }}</mat-icon>
+        <span>{{ icon.name }}</span>
+      </div>
+    </ng-container>
+    <ng-template #empty>
+      <h3>There are no icons yet</h3>
+    </ng-template>
+  </div>
+</div>

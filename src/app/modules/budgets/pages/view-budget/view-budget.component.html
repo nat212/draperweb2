@@ -1,20 +1,51 @@
-<div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
+<div class="page" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
   <ng-container *ngIf="columns$ | async as columns">
-    <mat-action-list *ngIf="columns.length; else empty">
-      <mat-list-item class="budget-column" *ngFor="let column of columns">
-        <h2 matLine>{{ column.name }}</h2>
-      </mat-list-item>
-    </mat-action-list>
+    <div
+      class="container"
+      gdRows="auto!"
+      gdColumns="auto"
+      gdColumns.gt-sm="repeat(2, 1fr)"
+      gdColumns.gt-md="repeat(3, 1fr)"
+      gdGap="16px"
+      *ngIf="columns.length; else empty"
+    >
+      <div class="budget-column" *ngFor="let column of columns" fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <span class="name">{{ column.name }}</span>
+          <span fxFlex="1 1 auto"></span>
+          <mat-menu #menu>
+            <button mat-menu-item type="button">
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+            <button mat-menu-item type="button" (click)="deleteColumn(column)">
+              <mat-icon color="warn">delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+          <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+        <span class="items">
+          <span class="count">{{ column.items?.length || 0 }}</span>
+          items
+        </span>
+      </div>
+    </div>
     <ng-template #empty>
       <h2>There are no columns in this budget</h2>
+      <button mat-raised-button type="button" color="primary">
+        <mat-icon>download</mat-icon>
+        Import Columns
+      </button>
+      <button mat-raised-button type="button" color="accent" (click)="createColumn()">
+        <mat-icon>add</mat-icon>
+        Add Column
+      </button>
     </ng-template>
-    <button mat-raised-button type="button" color="primary">
-      <mat-icon>download</mat-icon>
-      Import Columns
-    </button>
-    <button mat-raised-button type="button" color="accent" (click)="createColumn()">
-      <mat-icon>add</mat-icon>
-      Add Column
-    </button>
   </ng-container>
+  <button mat-fab color="accent" type="button" class="add-button" (click)="createColumn()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

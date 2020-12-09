@@ -23,6 +23,11 @@ const routes: Routes = [
         loadChildren: () => import('@modules/wishlists/wishlists.module').then((m) => m.WishlistsModule),
         data: { breadcrumb: 'Wishlists', title: 'Wishlists' },
       },
+      {
+        path: 'settings',
+        loadChildren: () => import('@modules/settings/settings.module').then((m) => m.SettingsModule),
+        data: { breadcrumb: 'Settings', title: 'Settings' },
+      },
     ],
   },
 ];

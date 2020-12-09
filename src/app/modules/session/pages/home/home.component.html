@@ -13,6 +13,11 @@
         <mat-icon matListIcon>{{ link.icon }}</mat-icon>
         <span matLine>{{ link.title }}</span>
       </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="settings">
+        <mat-icon matListIcon>settings</mat-icon>
+        <span matLine>Settings</span>
+      </mat-list-item>
     </mat-action-list>
   </mat-drawer>
   <mat-drawer-content class="app-drawer-content" fxLayout="column" fxLayoutAlign="start stretch">
@@ -27,6 +32,9 @@
         <button mat-icon-button *ngIf="update.updateAvailable$ | async" (click)="update.activateUpdate()" type="button">
           <mat-icon>system_update</mat-icon>
         </button>
+        <a mat-icon-button routerLink="settings">
+          <mat-icon>settings</mat-icon>
+        </a>
       </mat-toolbar-row>
     </mat-toolbar>
     <dw-breadcrumbs *ngIf="breadcrumbs$ | async as crumbs" [crumbs]="crumbs"></dw-breadcrumbs>

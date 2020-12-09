@@ -24,4 +24,5 @@ export class BudgetColumnService extends CollectionService<BudgetColumnState> {
     const sync = syncQuery.bind(this, this.buildQuery(budgetId));
     return sync();
   }
+
 }

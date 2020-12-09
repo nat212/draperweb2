@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UpdateService } from '@services/update.service';
-import { interval, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, first } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 interface Link {
   icon: string;
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     { icon: 'card_giftcard', title: 'Wishlists', path: 'wishlists' },
   ];
 
-  public breadcrumbs$ = new Subject<Crumb[]>();
+  public breadcrumbs$: BehaviorSubject<Crumb[]>;
 
   constructor(public update: UpdateService, private readonly route: ActivatedRoute, private readonly router: Router) {}
 
@@ -40,9 +40,7 @@ export class HomeComponent implements OnInit {
       .subscribe(() => {
         this.breadcrumbs$.next(this.buildBreadCrumb(this.route.root));
       });
-    interval(500)
-      .pipe(first())
-      .subscribe(() => this.breadcrumbs$.next(this.buildBreadCrumb(this.route.root)));
+    this.breadcrumbs$ = new BehaviorSubject(this.buildBreadCrumb(this.route.root));
   }
 
   private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Crumb[] = []): Crumb[] {

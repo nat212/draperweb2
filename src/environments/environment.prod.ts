@@ -10,4 +10,5 @@ export const environment = {
     appId: '1:475657754543:web:5d683fc551bf4a80d6c15a',
     measurementId: 'G-Y2P3E4NL10',
   },
+  mdiCodePointsURL: 'https://raw.githubusercontent.com/google/material-design-icons/master/font/MaterialIcons-Regular.codepoints',
 };

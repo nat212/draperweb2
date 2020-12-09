@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule, USE_EMULATOR as AUTH_EMULATOR } from '@angular/fire/auth';
@@ -36,6 +37,7 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatDialogModule,
     MatButtonModule,
+    HttpClientModule,
   ],
   providers: [
     {
