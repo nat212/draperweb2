@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { RouterQuery } from '@datorama/akita-ng-router-store';
-import { filter, map } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'dw-root',
@@ -11,15 +11,23 @@ import { filter, map } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   private readonly titlePrefix = 'DraperWeb';
 
-  constructor(private readonly title: Title, private readonly routerQuery: RouterQuery) {}
+  constructor(private readonly title: Title, private readonly route: ActivatedRoute, private readonly router: Router) {}
 
   public ngOnInit() {
-    this.routerQuery
-      .selectData()
+    this.router.events
       .pipe(
-        filter((data) => !!data.title),
-        map(({ title }) => title),
+        filter((event) => event instanceof NavigationEnd),
+        map(() => this.parseRouteTitle(this.route.root)),
+        startWith(this.parseRouteTitle(this.route.root)),
       )
-      .subscribe((title: string) => this.title.setTitle(`${this.titlePrefix} | ${title}`));
+      .subscribe((title) => this.title.setTitle(`${this.titlePrefix} | ${title}`));
+  }
+
+  public parseRouteTitle(route: ActivatedRoute, title: string = ''): string {
+    const newTitle = route.snapshot.data?.title ?? title;
+    if (route.firstChild) {
+      return this.parseRouteTitle(route.firstChild, newTitle);
+    }
+    return newTitle;
   }
 }

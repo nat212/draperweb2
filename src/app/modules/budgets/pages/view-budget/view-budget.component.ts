@@ -5,11 +5,9 @@ import { CreateColumnComponent } from '@modules/budgets/dialogs/create-column/cr
 import { BudgetColumn } from '@modules/budgets/state/budget-column/budget-column.model';
 import { BudgetColumnQuery } from '@modules/budgets/state/budget-column/budget-column.query';
 import { BudgetColumnService } from '@modules/budgets/state/budget-column/budget-column.service';
-import { BudgetQuery } from '@modules/budgets/state/budget/budget.query';
-import { BudgetService } from '@modules/budgets/state/budget/budget.service';
 import { AlertService } from '@services/alert.service';
 import { Observable, Subject } from 'rxjs';
-import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'dw-view-budget',
@@ -22,32 +20,16 @@ export class ViewBudgetComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<void>();
 
   constructor(
-    private readonly budgetQuery: BudgetQuery,
-    private columnQuery: BudgetColumnQuery,
-    private route: ActivatedRoute,
+    private readonly columnQuery: BudgetColumnQuery,
+    private readonly route: ActivatedRoute,
     private readonly alert: AlertService,
     private readonly dialog: MatDialog,
-    private columnService: BudgetColumnService,
-    private readonly budgetService: BudgetService,
+    private readonly columnService: BudgetColumnService,
   ) {}
 
   public ngOnInit(): void {
-    this.route.params
-      .pipe(
-        switchMap(({ id }) => this.budgetService.syncActive({ id })),
-        takeUntil(this.destroyed$),
-      )
-      .subscribe();
-    this.budgetQuery
-      .selectActive()
-      .pipe(
-        filter((budget) => !!budget),
-        switchMap((budget) => this.columnService.syncCollection({ params: { budgetId: budget.id } })),
-        takeUntil(this.destroyed$),
-      )
-      .subscribe();
     this.columns$ = this.columnQuery.selectAll();
-    this.route.paramMap.subscribe((params) => (this.budgetId = params.get('id')));
+    this.route.paramMap.subscribe((params) => (this.budgetId = params.get('budgetId')));
   }
 
   public ngOnDestroy() {

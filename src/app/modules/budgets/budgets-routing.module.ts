@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BudgetsHomeComponent } from './pages/budgets-home/budgets-home.component';
 import { ViewBudgetComponent } from './pages/view-budget/view-budget.component';
 import { BudgetNameResolverService } from './resolvers/budget-name-resolver.service';
+import { BudgetColumnGuard } from './state/budget-column/budget-column.guard';
 import { BudgetGuard } from './state/budget/budget.guard';
 
 const routes: Routes = [
@@ -13,9 +14,11 @@ const routes: Routes = [
     children: [
       { path: '', component: BudgetsHomeComponent, data: { title: 'Budgets' } },
       {
-        path: ':id',
+        path: ':budgetId',
         component: ViewBudgetComponent,
-        resolve: { title: BudgetNameResolverService },
+        canActivate: [BudgetColumnGuard],
+        canDeactivate: [BudgetColumnGuard],
+        resolve: { title: BudgetNameResolverService, breadcrumb: BudgetNameResolverService },
       },
     ],
   },

@@ -1,4 +1,12 @@
-<mat-toolbar color="accent" class="crumbs-toolbar">
+<mat-toolbar color="accent" class="crumbs-toolbar" fxLayout="row" fxLayoutAlign="start center">
+  <a mat-icon-button *ngIf="crumbs.length > 1; else home" [routerLink]="crumbs[crumbs.length - 2].url">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <ng-template #home>
+    <button mat-icon-button type="button">
+      <mat-icon>home</mat-icon>
+    </button>
+  </ng-template>
   <ng-container *ngFor="let crumb of crumbs; let last = last">
     <span class="crumb" [routerLink]="crumb.url">
       {{ crumb.label }}

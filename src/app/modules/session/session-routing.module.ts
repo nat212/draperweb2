@@ -16,12 +16,12 @@ const routes: Routes = [
       {
         path: 'budgets',
         loadChildren: () => import('@modules/budgets/budgets.module').then((m) => m.BudgetsModule),
-        data: { breadcrumb: 'Budgets' },
+        data: { breadcrumb: 'Budgets', title: 'Budgets' },
       },
       {
         path: 'wishlists',
         loadChildren: () => import('@modules/wishlists/wishlists.module').then((m) => m.WishlistsModule),
-        data: { breadcrumb: 'Wishlists' },
+        data: { breadcrumb: 'Wishlists', title: 'Wishlists' },
       },
     ],
   },

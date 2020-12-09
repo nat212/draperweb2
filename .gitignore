@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 *.log
 firestore-data/
+./scripts/emulator-admin-firebase.js
+firebase-data/

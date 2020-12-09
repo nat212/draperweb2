@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS } from '@angular/fire/firestore';
+import { AngularFireAuthModule, USE_EMULATOR as AUTH_EMULATOR } from '@angular/fire/auth';
+import { AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS, USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 import { FlexLayoutModule, GridModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -43,8 +43,12 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
       useValue: { appearance: 'fill' },
     },
     {
-      provide: FIRESTORE_SETTINGS,
-      useValue: environment.production ? undefined : ({ host: 'localhost:8282', ssl: false } as firebase.firestore.Settings),
+      provide: FIRESTORE_EMULATOR,
+      useValue: environment.production ? undefined : ['localhost', 8282],
+    },
+    {
+      provide: AUTH_EMULATOR,
+      useValue: environment.production ? undefined : ['localhost', 9099],
     },
   ],
   entryComponents: [MessageDialogComponent],

@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { map, take } from 'rxjs/operators';
-import { BudgetService } from '../state/budget/budget.service';
+import { BudgetQuery } from '../state/budget/budget.query';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetNameResolverService implements Resolve<string> {
-  constructor(private service: BudgetService) {}
+  constructor(private query: BudgetQuery) {}
 
   public resolve(route: ActivatedRouteSnapshot) {
-    const budgetId = route.paramMap.get('id');
-    return this.service.syncDoc({ id: budgetId }).pipe(
-      take(1),
-      map((budget) => budget.name),
-    );
+    const budgetId = route.paramMap.get('budgetId');
+    return this.query.getEntity(budgetId)?.name;
   }
 }
