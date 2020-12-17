@@ -1,10 +1,19 @@
-<div class="container" fxLayout="column" fxLayoutAlign="start center">
-  <mat-action-list>
+<div class="page" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+  <mat-action-list fxFlex="2 2 100%" [fxHide.lt-md]="childActivated$ | async">
     <span matSubheader>General Settings</span>
     <mat-divider></mat-divider>
     <mat-list-item routerLink="icons">
       <mat-icon matListIcon>insert_emoticon</mat-icon>
       <h3 matLine>Icon Settings</h3>
     </mat-list-item>
+    <span matSubheader>Budget Settings</span>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="budgets/categories">
+      <mat-icon matListIcon>category</mat-icon>
+      <h3 matLine>Categories</h3>
+    </mat-list-item>
   </mat-action-list>
+  <div class="contents" fxFlex="1 1 100%" fxHide [fxShow]="childActivated$ | async">
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,0 +1,46 @@
+<div class="page" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="24px">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>Add Category</mat-expansion-panel-header>
+    <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="categoryForm" (submit)="addCategory()">
+      <mat-form-field>
+        <mat-label>Name *</mat-label>
+        <input matInput type="text" name="new-category-name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Icon *</mat-label>
+        <mat-select formControlName="icon">
+          <mat-select-trigger>
+            <span *ngIf="categoryForm.value.icon as icon" fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon style="margin-right: 4px">{{ icon.icon }}</mat-icon>
+              {{ icon.name }}
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let icon of icons$ | async" [value]="icon">
+            <mat-icon>{{ icon.icon }}</mat-icon>
+            {{ icon.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+    </form>
+  </mat-expansion-panel>
+  <mat-action-list *ngIf="categories$ | async as categories">
+    <ng-container *ngIf="categories.length; else empty">
+      <h3 matSubheader>Categories</h3>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let category of categories">
+        <mat-icon matListIcon>{{ category.icon }}</mat-icon>
+        <h3 matLine>{{ category.name }}</h3>
+        <button mat-icon-button color="warn" (click)="deleteCategory(category, $event)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </ng-container>
+    <ng-template #empty>
+      <h2>There are no categories yet</h2>
+    </ng-template>
+  </mat-action-list>
+</div>

@@ -9,12 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { CategorySettingsComponent } from './pages/category-settings/category-settings.component';
 import { IconsSettingsComponent } from './pages/icons-settings/icons-settings.component';
 import { SettingsHomeComponent } from './pages/settings-home/settings-home.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 
 @NgModule({
-  declarations: [SettingsHomeComponent, IconsSettingsComponent],
+  declarations: [SettingsHomeComponent, IconsSettingsComponent, CategorySettingsComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
@@ -28,6 +30,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     MatInputModule,
     MatAutocompleteModule,
     MatExpansionModule,
+    MatSelectModule,
   ],
 })
 export class SettingsModule {}

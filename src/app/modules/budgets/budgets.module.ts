@@ -18,9 +18,10 @@ import { CreateColumnComponent } from './dialogs/create-column/create-column.com
 import { NewBudgetComponent } from './dialogs/new-budget/new-budget.component';
 import { BudgetsHomeComponent } from './pages/budgets-home/budgets-home.component';
 import { ViewBudgetComponent } from './pages/view-budget/view-budget.component';
+import { ViewColumnComponent } from './pages/view-column/view-column.component';
 
 @NgModule({
-  declarations: [BudgetsHomeComponent, NewBudgetComponent, ViewBudgetComponent, CreateColumnComponent],
+  declarations: [BudgetsHomeComponent, NewBudgetComponent, ViewBudgetComponent, CreateColumnComponent, ViewColumnComponent],
   imports: [
     CommonModule,
     BudgetsRoutingModule,
