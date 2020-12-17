@@ -16,16 +16,18 @@ const routes: Routes = [
       { path: '', component: BudgetsHomeComponent, data: { title: 'Budgets' } },
       {
         path: ':budgetId',
-        component: ViewBudgetComponent,
         canActivate: [BudgetColumnGuard],
         canDeactivate: [BudgetColumnGuard],
         resolve: { title: BudgetNameResolverService, breadcrumb: BudgetNameResolverService },
-      },
-      {
-        path: ':budgetId/columns/:columnId',
-        component: ViewColumnComponent,
-        canActivate: [BudgetColumnGuard],
-        canDeactivate: [BudgetColumnGuard],
+        children: [
+          { path: '', component: ViewBudgetComponent },
+          {
+            path: 'columns/:columnId',
+            component: ViewColumnComponent,
+            canActivate: [BudgetColumnGuard],
+            canDeactivate: [BudgetColumnGuard],
+          },
+        ],
       },
     ],
   },

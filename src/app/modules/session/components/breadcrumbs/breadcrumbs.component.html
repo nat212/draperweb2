@@ -1,5 +1,5 @@
 <mat-toolbar color="accent" class="crumbs-toolbar" fxLayout="row" fxLayoutAlign="start center">
-  <a mat-icon-button *ngIf="crumbs.length > 1; else home" [routerLink]="crumbs[crumbs.length - 2].url">
+  <a mat-icon-button *ngIf="crumbs.length > 1; else home" [routerLink]="crumbs[crumbs.length - 2].url" (click)="preventBubble($event)">
     <mat-icon>arrow_back</mat-icon>
   </a>
   <ng-template #home>
@@ -7,10 +7,12 @@
       <mat-icon>home</mat-icon>
     </button>
   </ng-template>
-  <ng-container *ngFor="let crumb of crumbs; let last = last">
-    <span class="crumb" [routerLink]="crumb.url">
-      {{ crumb.label }}
-    </span>
-    <mat-icon *ngIf="!last">chevron_right</mat-icon>
-  </ng-container>
+  <div class="crumbs" fxLayout="row" fxLayoutAlign="start center">
+    <ng-container *ngFor="let crumb of crumbs.reverse(); let last = last">
+      <span class="crumb" [routerLink]="crumb.url">
+        {{ crumb.label }}
+      </span>
+      <mat-icon *ngIf="!last">chevron_right</mat-icon>
+    </ng-container>
+  </div>
 </mat-toolbar>

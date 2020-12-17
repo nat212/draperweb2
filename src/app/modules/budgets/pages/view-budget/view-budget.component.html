@@ -9,7 +9,13 @@
       gdGap="16px"
       *ngIf="columns.length; else empty"
     >
-      <div class="budget-column" *ngFor="let column of columns" fxLayout="column" fxLayoutAlign="start stretch">
+      <div
+        class="budget-column"
+        *ngFor="let column of columns"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        [routerLink]="['columns', column.id]"
+      >
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <span class="name">{{ column.name }}</span>
           <span fxFlex="1 1 auto"></span>

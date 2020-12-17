@@ -6,17 +6,26 @@
   @include mat-elevation(4);
   z-index: 5;
   position: relative;
+  button {
+    position: relative;
+    z-index: 2;
+  }
 
-  .crumb {
-    user-select: none;
-    cursor: pointer;
-    &:not(:last-child):hover {
-      text-decoration: underline;
-    }
-    font-size: 18px;
+  .crumbs {
+    direction: rtl;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    .crumb {
+      user-select: none;
+      cursor: pointer;
+      &:not(:last-child):hover {
+        text-decoration: underline;
+      }
+      font-size: 18px;
 
-    @include layout-bp(lt-md) {
-      font-size: 16px;
+      @include layout-bp(lt-md) {
+        font-size: 16px;
+      }
     }
   }
 }

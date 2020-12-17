@@ -6,7 +6,7 @@ import { BudgetColumn } from './budget-column.model';
 export interface BudgetColumnState extends CollectionState<BudgetColumn> {}
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'budget-columns' })
+@StoreConfig({ name: 'budget-columns', resettable: true })
 export class BudgetColumnStore extends EntityStore<BudgetColumnState> {
   constructor() {
     super();

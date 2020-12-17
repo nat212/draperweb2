@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
-import { CollectionConfig, CollectionService, Query, syncQuery, syncWithRouter } from 'akita-ng-fire';
+import { CollectionConfig, CollectionService, Query, syncQuery } from 'akita-ng-fire';
+import { finalize, tap } from 'rxjs/operators';
 import { BudgetColumn } from './budget-column.model';
 import { BudgetColumnState, BudgetColumnStore } from './budget-column.store';
 
@@ -22,7 +23,6 @@ export class BudgetColumnService extends CollectionService<BudgetColumnState> {
 
   public sync(budgetId: string) {
     const sync = syncQuery.bind(this, this.buildQuery(budgetId));
-    return sync();
+    return sync().pipe(finalize(() => this.store.reset()));
   }
-
 }

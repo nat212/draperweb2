@@ -1,1 +1,25 @@
-<p>view-column works!</p>
+<div class="page">
+  <div fxHide.lt-md fxLayout="row" fxLayoutAlign="start stretch">
+    <div fxFlex="50%">
+      <ng-container *ngTemplateOutlet="items"></ng-container>
+    </div>
+    <div fxFlex="50%">
+      <ng-container *ngTemplateOutlet="charts"></ng-container>
+    </div>
+  </div>
+  <mat-tab-group fxHide.gt-sm>
+    <mat-tab label="Items">
+      <ng-container *ngTemplateOutlet="items"></ng-container>
+    </mat-tab>
+    <mat-tab label="Charts">
+      <ng-container *ngTemplateOutlet="charts"></ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<ng-template #items>
+  <h3>Items</h3>
+</ng-template>
+<ng-template #charts>
+  <h3>Charts</h3>
+</ng-template>

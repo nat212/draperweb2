@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { preventEventBubble } from '@helpers/prevent-bubble.helper';
 
 interface Crumb {
   label: string;
@@ -15,4 +16,8 @@ export class BreadcrumbsComponent implements OnInit {
   constructor() {}
 
   public ngOnInit(): void {}
+
+  public preventBubble(event: MouseEvent) {
+    preventEventBubble(event);
+  }
 }
