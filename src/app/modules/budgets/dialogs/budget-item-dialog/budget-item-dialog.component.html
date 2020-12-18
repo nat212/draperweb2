@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{ editing ? 'Edit' : 'Create' }} Budget Item</h1>
+<div mat-dialog-content>
+  <form [formGroup]="itemForm" fxLayout="column" fxLayoutAlign="start stretch" fxFlexAlign="stretch">
+    <mat-form-field>
+      <mat-label>Name *</mat-label>
+      <input matInput type="text" name="budget-item-title" formControlName="title" />
+    </mat-form-field>
+    <mat-button-toggle-group formControlName="type" style="margin-bottom: 8px">
+      <mat-button-toggle value="expense" fxFlex="50%" color="primary">Expense</mat-button-toggle>
+      <mat-button-toggle value="income" fxFlex="50%" color="primary">Income</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-form-field>
+      <mat-label>Amount *</mat-label>
+      <input matInput type="number" name="budget-item-amount" formControlName="amount" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category *</mat-label>
+      <mat-select formControlName="category">
+        <mat-select-trigger>
+          <span *ngIf="selectedCategory as category" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="margin-right: 4px">{{ category.icon }}</mat-icon>
+            {{ category.name }}
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
+          <mat-icon>{{ category.icon }}</mat-icon>
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button type="button" mat-dialog-close>Cancel</button>
+  <button mat-button type="button" color="primary" [disabled]="itemForm.invalid" [mat-dialog-close]="value">Submit</button>
+</div>

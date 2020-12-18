@@ -11,8 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SharedModule } from '@modules/shared/shared.module';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [HomeComponent, DashboardComponent, BreadcrumbsComponent],
@@ -27,6 +28,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     GridModule,
     MatListModule,
     MatGridListModule,
+    SharedModule,
   ],
 })
 export class SessionModule {}

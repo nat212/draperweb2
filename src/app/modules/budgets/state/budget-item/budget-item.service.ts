@@ -6,7 +6,7 @@ import { BudgetItem } from './budget-item.model';
 import { BudgetItemState, BudgetItemStore } from './budget-item.store';
 
 @Injectable({ providedIn: 'root' })
-@CollectionConfig({ path: 'budgets/:budgetId/colums/:columnId/items' })
+@CollectionConfig({ path: 'budgets/:budgetId/columns/:columnId/items' })
 export class BudgetItemService extends CollectionService<BudgetItemState> {
   constructor(protected store: BudgetItemStore) {
     super(store);

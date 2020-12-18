@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,9 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@modules/shared/shared.module';
 import { BudgetsRoutingModule } from './budgets-routing.module';
+import { BudgetItemDialogComponent } from './dialogs/budget-item-dialog/budget-item-dialog.component';
 import { CreateColumnComponent } from './dialogs/create-column/create-column.component';
 import { NewBudgetComponent } from './dialogs/new-budget/new-budget.component';
 import { BudgetsHomeComponent } from './pages/budgets-home/budgets-home.component';
@@ -22,7 +25,14 @@ import { ViewBudgetComponent } from './pages/view-budget/view-budget.component';
 import { ViewColumnComponent } from './pages/view-column/view-column.component';
 
 @NgModule({
-  declarations: [BudgetsHomeComponent, NewBudgetComponent, ViewBudgetComponent, CreateColumnComponent, ViewColumnComponent],
+  declarations: [
+    BudgetsHomeComponent,
+    NewBudgetComponent,
+    ViewBudgetComponent,
+    CreateColumnComponent,
+    ViewColumnComponent,
+    BudgetItemDialogComponent,
+  ],
   imports: [
     CommonModule,
     BudgetsRoutingModule,
@@ -40,6 +50,8 @@ import { ViewColumnComponent } from './pages/view-column/view-column.component';
     MatExpansionModule,
     MatMenuModule,
     MatTabsModule,
+    MatButtonToggleModule,
+    MatSelectModule,
   ],
   entryComponents: [NewBudgetComponent],
 })

@@ -67,6 +67,13 @@ body {
   --success-darker-text-colour: #{mat-color($draperweb2-success, darker-contrast)};
   --success-lighter-text-colour: #{mat-color($draperweb2-success, lighter-contrast)};
 
+  --warn-colour: #{mat-color($draperweb2-warn, default)};
+  --warn-darker-colour: #{mat-color($draperweb2-warn, darker)};
+  --warn-lighter-colour: #{mat-color($draperweb2-warn, lighter)};
+  --warn-text-colour: #{mat-color($draperweb2-warn, default-contrast)};
+  --warn-darker-text-colour: #{mat-color($draperweb2-warn, darker-contrast)};
+  --warn-lighter-text-colour: #{mat-color($draperweb2-warn, lighter-contrast)};
+
   --background-colour: #fafafa;
 }
 

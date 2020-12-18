@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivationEnd, NavigationEnd, Router, RoutesRecognized } from '@angular/router';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
 import { UpdateService } from '@services/update.service';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
@@ -28,7 +29,13 @@ export class HomeComponent implements OnInit {
 
   public breadcrumbs$: BehaviorSubject<Crumb[]>;
 
-  constructor(public update: UpdateService, private readonly route: ActivatedRoute, private readonly router: Router) {}
+  constructor(
+    public update: UpdateService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly cdRef: ChangeDetectorRef,
+    private readonly routerQuery: RouterQuery,
+  ) {}
 
   public ngOnInit() {
     this.update.subscribe();
@@ -38,9 +45,14 @@ export class HomeComponent implements OnInit {
         distinctUntilChanged(),
       )
       .subscribe(() => {
-        this.breadcrumbs$.next(this.buildBreadCrumb(this.route.root));
+        this.setBreadcrumbs();
       });
     this.breadcrumbs$ = new BehaviorSubject(this.buildBreadCrumb(this.route.root));
+  }
+
+  private setBreadcrumbs() {
+    this.breadcrumbs$.next(this.buildBreadCrumb(this.route.root));
+    this.cdRef.markForCheck();
   }
 
   private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Crumb[] = []): Crumb[] {

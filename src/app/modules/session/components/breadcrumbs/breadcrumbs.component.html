@@ -8,7 +8,7 @@
     </button>
   </ng-template>
   <div class="crumbs" fxLayout="row" fxLayoutAlign="start center">
-    <ng-container *ngFor="let crumb of crumbs.reverse(); let last = last">
+    <ng-container *ngFor="let crumb of crumbs | reverse; let last = last">
       <span class="crumb" [routerLink]="crumb.url">
         {{ crumb.label }}
       </span>

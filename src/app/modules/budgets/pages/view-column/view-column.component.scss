@@ -2,3 +2,23 @@
   width: 100%;
   padding: 16px;
 }
+
+.item-title {
+  font-weight: 500 !important;
+}
+
+.item-amount {
+  font-weight: 500 !important;
+  &.expense {
+    color: var(--warn-colour);
+  }
+  &.income {
+    color: var(--success-colour);
+  }
+}
+
+.add-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}

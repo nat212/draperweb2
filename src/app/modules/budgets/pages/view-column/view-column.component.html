@@ -1,6 +1,6 @@
 <div class="page">
-  <div fxHide.lt-md fxLayout="row" fxLayoutAlign="start stretch">
-    <div fxFlex="50%">
+  <div fxHide.lt-md fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="24px">
+    <div fxFlex="50%" class="items-container">
       <ng-container *ngTemplateOutlet="items"></ng-container>
     </div>
     <div fxFlex="50%">
@@ -15,10 +15,42 @@
       <ng-container *ngTemplateOutlet="charts"></ng-container>
     </mat-tab>
   </mat-tab-group>
+  <button mat-fab color="accent" (click)="addItem()" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
 
 <ng-template #items>
-  <h3>Items</h3>
+  <mat-action-list *ngIf="items$ | async as items">
+    <h3 mat-subheader>Items</h3>
+    <mat-divider></mat-divider>
+    <ng-container *ngIf="items.length; else empty">
+      <mat-list-item *ngFor="let item of items">
+        <mat-icon mat-list-icon *ngIf="item.category">{{ getIcon(item.category) }}</mat-icon>
+        <div mat-line class="item-title">{{ item.title }}</div>
+        <div mat-line class="item-category">{{ item.category?.name }}</div>
+        <div mat-line class="item-amount" [class.expense]="item.amount < 0" [class.income]="item.amount > 0">
+          {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
+        </div>
+        <mat-menu #menu>
+          <button mat-menu-item type="button" (click)="editItem(item)">
+            <mat-icon>edit</mat-icon>
+            Edit Item
+          </button>
+          <button mat-menu-item type="button">
+            <mat-icon color="warn">delete</mat-icon>
+            Delete Item
+          </button>
+        </mat-menu>
+        <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-list-item>
+    </ng-container>
+    <ng-template #empty>
+      <h3>There are no items yet</h3>
+    </ng-template>
+  </mat-action-list>
 </ng-template>
 <ng-template #charts>
   <h3>Charts</h3>
