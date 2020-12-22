@@ -55,4 +55,14 @@ export class ViewBudgetComponent implements OnInit, OnDestroy {
         }
       });
   }
+
+  public columnSummary(column: BudgetColumn): { expenses: number; income: number; remaining: number } {
+    const amounts = (column.items || []).map((i) => i.amount);
+    const expenseItems = amounts.filter((a) => a < 0).map((a) => Math.abs(a));
+    const incomeItems = amounts.filter((a) => a > 0);
+    const expenses = expenseItems.reduce((acc, curr) => acc + curr, 0);
+    const income = incomeItems.reduce((acc, curr) => acc + curr, 0);
+    const remaining = income - expenses;
+    return { expenses, income, remaining };
+  }
 }

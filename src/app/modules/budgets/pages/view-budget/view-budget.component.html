@@ -37,6 +37,28 @@
           <span class="count">{{ column.items?.length || 0 }}</span>
           items
         </span>
+        <span class="summary" *ngIf="columnSummary(column) as summary" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+          <span class="income">
+            <span class="amount positive">
+              {{ summary.income | currency: 'ZAR':'symbol-narrow' }}
+            </span>
+            <span>in</span>
+          </span>
+          <span class="divider">|</span>
+          <span class="expenses">
+            <span class="amount negative">
+              {{ summary.expenses | currency: 'ZAR':'symbol-narrow' }}
+            </span>
+            <span>out</span>
+          </span>
+          <span class="divider">|</span>
+          <span class="remaining">
+            <span class="amount" [class.positive]="summary.remaining > 0" [class.negative]="summary.remaining < 0">
+              {{ summary.remaining | currency: 'ZAR':'symbol-narrow' }}
+            </span>
+            <span>left</span>
+          </span>
+        </span>
       </div>
     </div>
     <ng-template #empty>

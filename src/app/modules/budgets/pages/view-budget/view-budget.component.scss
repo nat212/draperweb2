@@ -33,4 +33,19 @@
       color: var(--primary-darker-colour);
     }
   }
+
+  .summary {
+    .amount {
+      font-weight: 500;
+      &.positive {
+        color: var(--success-colour);
+      }
+      &.negative {
+        color: var(--warn-colour);
+      }
+    }
+    .divider {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
 }
