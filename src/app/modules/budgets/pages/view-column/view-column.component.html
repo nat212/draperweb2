@@ -1,13 +1,14 @@
 <div class="page">
-  <div fxHide.lt-md fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="24px">
+  <div fxHide.lt-md fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="24px" class="desktop-container">
     <div fxFlex="50%" class="items-container">
       <ng-container *ngTemplateOutlet="items"></ng-container>
     </div>
+    <mat-divider [vertical]="true"></mat-divider>
     <div fxFlex="50%">
       <ng-container *ngTemplateOutlet="charts"></ng-container>
     </div>
   </div>
-  <mat-tab-group fxHide.gt-sm>
+  <mat-tab-group fxHide.gt-sm class="tab-group fill-height">
     <mat-tab label="Items">
       <ng-container *ngTemplateOutlet="items"></ng-container>
     </mat-tab>
@@ -21,37 +22,67 @@
 </div>
 
 <ng-template #items>
-  <mat-action-list *ngIf="items$ | async as items">
-    <h3 mat-subheader>Items</h3>
+  <div class="items-container" fxLayout="column" fxLayoutAlign="start stretch">
+    <div class="header" fxHide.lt-md>
+      <h3>Items</h3>
+      <mat-divider></mat-divider>
+    </div>
+    <div fxFlex="1 1 auto" class="item-list">
+      <mat-action-list *ngIf="items$ | async as items">
+        <ng-container *ngIf="items.length; else empty">
+          <mat-list-item *ngFor="let item of items" class="item">
+            <mat-icon mat-list-icon *ngIf="item.category">{{ getIcon(item.category) }}</mat-icon>
+            <div mat-line class="item-title">{{ item.title }}</div>
+            <div mat-line class="item-category">{{ item.category?.name }}</div>
+            <div mat-line class="item-amount" [class.expense]="item.amount < 0" [class.income]="item.amount > 0">
+              {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
+            </div>
+            <mat-menu #menu>
+              <button mat-menu-item type="button" (click)="editItem(item)">
+                <mat-icon>edit</mat-icon>
+                Edit Item
+              </button>
+              <button mat-menu-item type="button" (click)="deleteItem(item)">
+                <mat-icon color="warn">delete</mat-icon>
+                Delete Item
+              </button>
+            </mat-menu>
+            <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </ng-container>
+        <ng-template #empty>
+          <h3>There are no items yet</h3>
+        </ng-template>
+      </mat-action-list>
+    </div>
     <mat-divider></mat-divider>
-    <ng-container *ngIf="items.length; else empty">
-      <mat-list-item *ngFor="let item of items">
-        <mat-icon mat-list-icon *ngIf="item.category">{{ getIcon(item.category) }}</mat-icon>
-        <div mat-line class="item-title">{{ item.title }}</div>
-        <div mat-line class="item-category">{{ item.category?.name }}</div>
-        <div mat-line class="item-amount" [class.expense]="item.amount < 0" [class.income]="item.amount > 0">
-          {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
-        </div>
-        <mat-menu #menu>
-          <button mat-menu-item type="button" (click)="editItem(item)">
-            <mat-icon>edit</mat-icon>
-            Edit Item
-          </button>
-          <button mat-menu-item type="button">
-            <mat-icon color="warn">delete</mat-icon>
-            Delete Item
-          </button>
-        </mat-menu>
-        <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </mat-list-item>
-    </ng-container>
-    <ng-template #empty>
-      <h3>There are no items yet</h3>
-    </ng-template>
-  </mat-action-list>
+    <div class="item-footer" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="summary$ | async as summary" fxLayoutGap="4px">
+      <span class="income">
+        <span class="amount positive">
+          {{ summary.income | currency: 'ZAR':'symbol-narrow' }}
+        </span>
+        <span>income</span>
+      </span>
+      <span class="expenses">
+        <span class="amount negative">
+          {{ summary.expenses | currency: 'ZAR':'symbol-narrow' }}
+        </span>
+        <span>expenses</span>
+      </span>
+      <span class="remaining">
+        <span class="amount" [class.positive]="summary.remaining > 0" [class.negative]="summary.remaining < 0">
+          {{ summary.remaining | currency: 'ZAR':'symbol-narrow' }}
+        </span>
+        <span>remaining</span>
+      </span>
+    </div>
+  </div>
 </ng-template>
 <ng-template #charts>
-  <h3>Charts</h3>
+  <div class="header" fxHide.lt-md>
+    <h3>Charts</h3>
+    <mat-divider></mat-divider>
+  </div>
 </ng-template>

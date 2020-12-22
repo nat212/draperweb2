@@ -86,3 +86,9 @@ body {
 .mat-form-field-prefix {
   margin-right: 4px;
 }
+
+mat-tab-group.fill-height {
+  .mat-tab-body-wrapper {
+    height: 100%;
+  }
+}
