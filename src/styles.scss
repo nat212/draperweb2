@@ -1,6 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
+@import '~@angular/flex-layout/mq';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -90,5 +91,29 @@ body {
 mat-tab-group.fill-height {
   .mat-tab-body-wrapper {
     height: 100%;
+  }
+}
+
+ngx-charts-advanced-pie-chart {
+  line-height: unset;
+  &.adaptive {
+    @include layout-bp(lt-md) {
+      > div {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+      }
+    }
+
+    .legend-items {
+      display: flex;
+
+      @include layout-bp(gt-sm) {
+        flex-flow: row wrap;
+      }
+      @include layout-bp(lt-md) {
+        flex-flow: column nowrap;
+      }
+    }
   }
 }
