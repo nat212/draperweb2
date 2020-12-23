@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BudgetItemDialogComponent, BudgetItemDialogData } from '@modules/budgets/dialogs/budget-item-dialog/budget-item-dialog.component';
@@ -7,7 +9,8 @@ import { BudgetItemQuery } from '@modules/budgets/state/budget-item/budget-item.
 import { BudgetItemService } from '@modules/budgets/state/budget-item/budget-item.service';
 import { CategoryModel } from '@modules/budgets/state/category/category.model';
 import { AlertService } from '@services/alert.service';
-import { Observable } from 'rxjs';
+import { Map, Set } from 'immutable';
+import { Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { IconQuery } from 'src/app/state/icon/icon.query';
 
@@ -16,11 +19,19 @@ import { IconQuery } from 'src/app/state/icon/icon.query';
   templateUrl: './view-column.component.html',
   styleUrls: ['./view-column.component.scss'],
 })
-export class ViewColumnComponent implements OnInit {
+export class ViewColumnComponent implements OnInit, AfterViewInit {
   private budgetId: string;
   private columnId: string;
   private highestOrder: number;
   public items$: Observable<BudgetItemModel[]>;
+  public summary$: Observable<{ income: number; expenses: number; remaining: number }>;
+  public categoryBreakdown$: Observable<{ name: string; value: number }[]>;
+  public valueFormatter: (value: number) => string;
+  public isMobile$: Observable<boolean>;
+
+  public chartContainerWidth$ = new Subject<number>();
+  public chartView$: Observable<number[]>;
+  @ViewChild('chartsContainer') private chartsContainer: ElementRef<HTMLDivElement>;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -29,6 +40,9 @@ export class ViewColumnComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly icon: IconQuery,
     private readonly alert: AlertService,
+    private readonly currencyPipe: CurrencyPipe,
+    private readonly mediaObserver: MediaObserver,
+    private readonly cdRef: ChangeDetectorRef,
   ) {}
 
   public ngOnInit(): void {
@@ -38,6 +52,42 @@ export class ViewColumnComponent implements OnInit {
     });
     this.query.highestOrder$.subscribe((order) => (this.highestOrder = order ?? 0));
     this.items$ = this.query.models$;
+    this.summary$ = this.items$.pipe(
+      map((items) => items.map((i) => i.amount)),
+      map((items) => ({
+        income: items.filter((i) => i > 0).reduce((acc, curr) => acc + curr, 0),
+        expenses: items
+          .filter((i) => i < 0)
+          .map((i) => Math.abs(i))
+          .reduce((acc, curr) => acc + curr, 0),
+      })),
+      map(({ income, expenses }) => ({ income, expenses, remaining: income - expenses })),
+    );
+
+    const getCategoryTotal = (items: BudgetItemModel[], categoryId: string, expense = true) =>
+      items
+        .filter((i) => i.categoryId === categoryId && (expense ? i.amount < 0 : i.amount > 0))
+        .reduce((acc, curr) => acc + Math.abs(curr.amount), 0);
+
+    this.categoryBreakdown$ = this.items$.pipe(
+      map((items) =>
+        [...Set(items.filter((i) => !!i.category).map((i) => Map({ ...i.category })))].map((cat) => ({
+          name: cat.get('name'),
+          value: getCategoryTotal(items, cat.get('id'), true),
+        })),
+      ),
+    );
+    this.valueFormatter = (value: number) => this.currencyPipe.transform(value, 'ZAR', 'symbol-narrow');
+
+    this.isMobile$ = this.mediaObserver.asObservable().pipe(
+      map((mediaChanges) => mediaChanges.map((mc) => mc.mqAlias)),
+      map((mediaChanges) => mediaChanges.includes('lt-md')),
+    );
+    this.chartView$ = this.chartContainerWidth$.pipe(map((width) => [width, width]));
+  }
+
+  public ngAfterViewInit() {
+    this.setChartsContainerWidth();
   }
 
   public getIcon(category: CategoryModel) {
@@ -65,20 +115,6 @@ export class ViewColumnComponent implements OnInit {
       });
   }
 
-  public get summary$(): Observable<{ income: number; expenses: number; remaining: number }> {
-    return this.items$.pipe(
-      map((items) => items.map((i) => i.amount)),
-      map((items) => ({
-        income: items.filter((i) => i > 0).reduce((acc, curr) => acc + curr, 0),
-        expenses: items
-          .filter((i) => i < 0)
-          .map((i) => Math.abs(i))
-          .reduce((acc, curr) => acc + curr, 0),
-      })),
-      map(({ income, expenses }) => ({ income, expenses, remaining: income - expenses })),
-    );
-  }
-
   public deleteItem(item: BudgetItemModel) {
     this.alert
       .messageDialog('Delete Budget Item', `Are you sure you wish to delete ${item.title}? This operation cannot be undone.`, true)
@@ -86,5 +122,18 @@ export class ViewColumnComponent implements OnInit {
       .subscribe(() => {
         this.service.remove(item.id, { params: { budgetId: this.budgetId, columnId: this.columnId } });
       });
+  }
+
+  public formatValue(value: number) {
+    return this.currencyPipe.transform(value, 'ZAR', 'symbol-narrow');
+  }
+
+  private setChartsContainerWidth() {
+    this.chartContainerWidth$.next(this.chartsContainer.nativeElement.offsetWidth);
+  }
+
+  @HostListener('window:resize')
+  public onWindowResize() {
+    this.setChartsContainerWidth();
   }
 }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@modules/shared/shared.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BudgetsRoutingModule } from './budgets-routing.module';
 import { BudgetItemDialogComponent } from './dialogs/budget-item-dialog/budget-item-dialog.component';
 import { CreateColumnComponent } from './dialogs/create-column/create-column.component';
@@ -52,7 +53,9 @@ import { ViewColumnComponent } from './pages/view-column/view-column.component';
     MatTabsModule,
     MatButtonToggleModule,
     MatSelectModule,
+    NgxChartsModule,
   ],
+  providers: [CurrencyPipe],
   entryComponents: [NewBudgetComponent],
 })
 export class BudgetsModule {}

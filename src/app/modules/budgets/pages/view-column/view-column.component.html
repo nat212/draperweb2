@@ -10,10 +10,14 @@
   </div>
   <mat-tab-group fxHide.gt-sm class="tab-group fill-height">
     <mat-tab label="Items">
-      <ng-container *ngTemplateOutlet="items"></ng-container>
+      <ng-template matTabContent>
+        <ng-container *ngTemplateOutlet="items"></ng-container>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Charts">
-      <ng-container *ngTemplateOutlet="charts"></ng-container>
+      <ng-template matTabContent>
+        <ng-container *ngTemplateOutlet="charts"></ng-container>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
   <button mat-fab color="accent" (click)="addItem()" class="add-button">
@@ -81,8 +85,20 @@
   </div>
 </ng-template>
 <ng-template #charts>
-  <div class="header" fxHide.lt-md>
-    <h3>Charts</h3>
-    <mat-divider></mat-divider>
+  <div class="charts-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.lt-md="start center" #chartsContainer>
+    <div class="header" fxHide.lt-md>
+      <h3>Charts</h3>
+      <mat-divider></mat-divider>
+    </div>
+    <ngx-charts-pie-chart
+      [results]="categoryBreakdown$ | async"
+      class="adaptive"
+      [tooltipDisabled]="false"
+      [doughnut]="true"
+      [legend]="true"
+      [legendPosition]="(isMobile$ | async) ? 'below' : 'right'"
+      [view]="(isMobile$ | async) ? null : [700, 400]"
+      [animations]="false"
+    ></ngx-charts-pie-chart>
   </div>
 </ng-template>
