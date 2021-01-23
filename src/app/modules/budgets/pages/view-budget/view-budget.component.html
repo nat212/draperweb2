@@ -63,7 +63,7 @@
     </div>
     <ng-template #empty>
       <h2>There are no columns in this budget</h2>
-      <button mat-raised-button type="button" color="primary">
+      <button mat-raised-button type="button" color="primary" (click)="importColumns()">
         <mat-icon>download</mat-icon>
         Import Columns
       </button>

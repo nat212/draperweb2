@@ -1,11 +1,12 @@
 import { WishlistItem } from '@modules/wishlists/state/wishlist-item/wishlist-item.model';
 import { Expose } from 'class-transformer';
+import { BudgetItem } from '../budget-item/budget-item.model';
 
 export interface BudgetColumn {
   id: string;
   name: string;
   budgetId: string;
-  items?: WishlistItem[];
+  items?: BudgetItem[];
 }
 
 interface ColumnSummary {
@@ -17,7 +18,7 @@ interface ColumnSummary {
 export class BudgetColumnModel {
   @Expose() public readonly id: string;
   @Expose() public readonly name: string;
-  @Expose() public readonly items: WishlistItem[];
+  @Expose() public readonly items: BudgetItem[];
 
   public get columnSummary(): ColumnSummary {
     const expensesList = this.items.filter((i) => i.amount < 0);

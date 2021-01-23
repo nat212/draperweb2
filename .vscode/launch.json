@@ -10,7 +10,7 @@
             "reAttach": true,
             "name": "Launch Firefox",
             "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
         }
     ]
 }

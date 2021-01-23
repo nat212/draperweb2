@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateColumnComponent } from '@modules/budgets/dialogs/create-column/create-column.component';
+import { ImportColumnsDialogComponent } from '@modules/budgets/dialogs/import-columns-dialog/import-columns-dialog.component';
 import { BudgetColumn } from '@modules/budgets/state/budget-column/budget-column.model';
 import { BudgetColumnQuery } from '@modules/budgets/state/budget-column/budget-column.query';
 import { BudgetColumnService } from '@modules/budgets/state/budget-column/budget-column.service';
+import { Budget } from '@modules/budgets/state/budget/budget.model';
 import { AlertService } from '@services/alert.service';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -25,6 +27,7 @@ export class ViewBudgetComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService,
     private readonly dialog: MatDialog,
     private readonly columnService: BudgetColumnService,
+    private readonly router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -34,6 +37,18 @@ export class ViewBudgetComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     this.destroyed$.next();
+  }
+
+  public importColumns() {
+    this.dialog
+      .open(ImportColumnsDialogComponent, { data: { budget: this.budgetId } })
+      .afterClosed()
+      .pipe(filter(val => !!val))
+      .subscribe((val: { budget: Budget, columns: BudgetColumn[] }) => {
+        const budget = val.budget.id;
+        const columns = val.columns.map(c => c.id);
+        this.router.navigate(['import'], { queryParams: { budget, columns }, relativeTo: this.route });
+      });
   }
 
   public createColumn() {

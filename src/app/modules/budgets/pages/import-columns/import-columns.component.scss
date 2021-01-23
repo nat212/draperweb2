@@ -1,0 +1,19 @@
+.page {
+  padding: 24px;
+}
+
+.item-amount {
+  &.expense {
+    color: var(--warn-colour);
+  }
+  &.income {
+    color: var(--success-colour);
+  }
+}
+
+.import-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 2;
+}

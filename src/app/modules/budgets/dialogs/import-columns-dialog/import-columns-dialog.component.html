@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Import Columns</h1>
+<div mat-dialog-content [formGroup]="budgetForm">
+  <p>Select a budget, and then select the columns to import</p>
+  <mat-form-field style="width: 100%">
+    <mat-label>Budget</mat-label>
+    <mat-select formControlName="budget">
+      <mat-option *ngFor="let budget of budgets$ | async" [value]="budget">
+        {{ budget.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-selection-list formControlName="columns">
+    <mat-list-option *ngFor="let column of columns$ | async" [value]="column">
+      {{ column.name }}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button type="button" mat-dialog-close>Cancel</button>
+  <button mat-button type="button" [mat-dialog-close]="budgetForm.value" [disabled]="budgetForm.invalid">Import</button>
+</div>

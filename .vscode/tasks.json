@@ -14,6 +14,13 @@
 			"label": "Start Firebase Emulators",
 			"detail": "firebase emulators:start",
 			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "setup-user",
+			"problemMatcher": [],
+			"label": "npm: setup-user",
+			"detail": "tsc ./scripts/emulator-admin-firebase.ts && node ./scripts/setup-user.js"
 		}
 	]
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IconGuard } from 'src/app/state/icon/icon.guard';
 import { BudgetsHomeComponent } from './pages/budgets-home/budgets-home.component';
+import { ImportColumnsComponent } from './pages/import-columns/import-columns.component';
 import { ViewBudgetComponent } from './pages/view-budget/view-budget.component';
 import { ViewColumnComponent } from './pages/view-column/view-column.component';
 import { BudgetColumnNameResolverService } from './resolvers/budget-column-name-resolver.service';
@@ -24,6 +25,7 @@ const routes: Routes = [
         resolve: { title: BudgetNameResolverService, breadcrumb: BudgetNameResolverService },
         children: [
           { path: '', component: ViewBudgetComponent },
+          { path: 'import', component: ImportColumnsComponent, data: { title: 'Import Columns', breadcrumb: 'Import Columns' } },
           {
             path: 'columns/:columnId',
             component: ViewColumnComponent,
