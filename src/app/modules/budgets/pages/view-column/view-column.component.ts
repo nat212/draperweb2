@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CurrencyPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -8,12 +8,10 @@ import { BudgetItemDialogComponent, BudgetItemDialogData } from '@modules/budget
 import { BudgetItem, BudgetItemModel } from '@modules/budgets/state/budget-item/budget-item.model';
 import { BudgetItemQuery } from '@modules/budgets/state/budget-item/budget-item.query';
 import { BudgetItemService } from '@modules/budgets/state/budget-item/budget-item.service';
-import { CategoryModel } from '@modules/budgets/state/category/category.model';
 import { AlertService } from '@services/alert.service';
 import { Map, Set } from 'immutable';
 import { Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { IconQuery } from 'src/app/state/icon/icon.query';
 
 @Component({
   selector: 'dw-view-column',
@@ -24,7 +22,6 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
   private budgetId: string;
   private columnId: string;
   private highestOrder: number;
-  private iconCache: { [iconId: string]: string };
   public items$: Observable<BudgetItemModel[]>;
   public summary$: Observable<{ income: number; expenses: number; remaining: number }>;
   public categoryBreakdown$: Observable<{ name: string; value: number }[]>;
@@ -40,15 +37,12 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
     private readonly service: BudgetItemService,
     private readonly query: BudgetItemQuery,
     private readonly dialog: MatDialog,
-    private readonly icon: IconQuery,
     private readonly alert: AlertService,
     private readonly currencyPipe: CurrencyPipe,
     private readonly mediaObserver: MediaObserver,
-    private readonly cdRef: ChangeDetectorRef,
   ) {}
 
   public ngOnInit(): void {
-    this.iconCache = {};
     this.route.params.subscribe(({ budgetId, columnId }) => {
       this.budgetId = budgetId;
       this.columnId = columnId;
@@ -91,13 +85,6 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit() {
     this.setChartsContainerWidth();
-  }
-
-  public getIcon(category: CategoryModel) {
-    if (!this.iconCache[category.iconId]) {
-      this.iconCache[category.iconId] = this.icon.getEntity(category.iconId)?.icon;
-    }
-    return this.iconCache[category.iconId];
   }
 
   public addItem() {

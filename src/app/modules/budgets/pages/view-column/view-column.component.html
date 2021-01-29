@@ -36,7 +36,7 @@
         <ng-container *ngIf="items.length; else empty">
           <div *ngFor="let item of items" class="item mat-list-item" cdkDrag>
             <mat-icon cdkDragHandle class="drag-handle">drag_indicator</mat-icon>
-            <mat-icon *ngIf="item.category">{{ getIcon(item.category) }}</mat-icon>
+            <mat-icon *ngIf="item.category">{{ item.category.icon }}</mat-icon>
             <div class="item-details">
               <div class="item-title">{{ item.title }}</div>
               <div class="item-category">{{ item.category?.name }}</div>
