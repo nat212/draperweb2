@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
@@ -135,5 +136,17 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
   @HostListener('window:resize')
   public onWindowResize() {
     this.setChartsContainerWidth();
+  }
+
+  public onDrop(event: CdkDragDrop<BudgetItemModel[]>) {
+    const elements = event.container.data;
+    const elementDragged = elements[event.previousIndex];
+    const replacing = elements[event.currentIndex];
+    moveItemInArray(elements, event.previousIndex, event.currentIndex);
+    if (elementDragged.order > replacing.order) {
+      this.service.moveItemHigher(elementDragged, replacing.order, elements, { budgetId: this.budgetId, columnId: this.columnId });
+    } else if (elementDragged.order < replacing.order) {
+      this.service.moveItemLower(elementDragged, replacing.order, elements, { budgetId: this.budgetId, columnId: this.columnId });
+    }
   }
 }

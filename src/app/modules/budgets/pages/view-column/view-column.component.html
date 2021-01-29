@@ -32,14 +32,16 @@
       <mat-divider></mat-divider>
     </div>
     <div fxFlex="1 1 auto" class="item-list">
-      <mat-action-list *ngIf="items$ | async as items">
+      <div *ngIf="items$ | async as items" cdkDropList (cdkDropListDropped)="onDrop($event)" [cdkDropListData]="items">
         <ng-container *ngIf="items.length; else empty">
-          <mat-list-item *ngFor="let item of items" class="item">
+          <div *ngFor="let item of items" class="item mat-list-item" cdkDrag>
             <mat-icon mat-list-icon *ngIf="item.category">{{ getIcon(item.category) }}</mat-icon>
-            <div mat-line class="item-title">{{ item.title }}</div>
-            <div mat-line class="item-category">{{ item.category?.name }}</div>
-            <div mat-line class="item-amount" [class.expense]="item.amount < 0" [class.income]="item.amount > 0">
-              {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
+            <div class="item-details">
+              <div class="item-title">{{ item.title }}</div>
+              <div class="item-category">{{ item.category?.name }}</div>
+              <div class="item-amount" [class.expense]="item.amount < 0" [class.income]="item.amount > 0">
+                {{ item.amount | currency: 'ZAR':'symbol-narrow' }}
+              </div>
             </div>
             <mat-menu #menu>
               <button mat-menu-item type="button" (click)="editItem(item)">
@@ -54,12 +56,12 @@
             <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
-          </mat-list-item>
+          </div>
         </ng-container>
         <ng-template #empty>
           <h3>There are no items yet</h3>
         </ng-template>
-      </mat-action-list>
+      </div>
     </div>
     <mat-divider></mat-divider>
     <div class="item-footer" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="summary$ | async as summary" fxLayoutGap="4px">

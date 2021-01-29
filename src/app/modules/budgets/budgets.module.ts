@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -62,6 +63,7 @@ import { ViewColumnComponent } from './pages/view-column/view-column.component';
     NgxChartsModule,
     MatCardModule,
     MatTooltipModule,
+    DragDropModule,
   ],
   providers: [CurrencyPipe],
   entryComponents: [NewBudgetComponent],
