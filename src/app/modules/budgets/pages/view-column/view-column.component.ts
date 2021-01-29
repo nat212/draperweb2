@@ -24,6 +24,7 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
   private budgetId: string;
   private columnId: string;
   private highestOrder: number;
+  private iconCache: { [iconId: string]: string };
   public items$: Observable<BudgetItemModel[]>;
   public summary$: Observable<{ income: number; expenses: number; remaining: number }>;
   public categoryBreakdown$: Observable<{ name: string; value: number }[]>;
@@ -47,6 +48,7 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
   ) {}
 
   public ngOnInit(): void {
+    this.iconCache = {};
     this.route.params.subscribe(({ budgetId, columnId }) => {
       this.budgetId = budgetId;
       this.columnId = columnId;
@@ -92,7 +94,10 @@ export class ViewColumnComponent implements OnInit, AfterViewInit {
   }
 
   public getIcon(category: CategoryModel) {
-    return this.icon.getEntity(category.iconId)?.icon;
+    if (!this.iconCache[category.iconId]) {
+      this.iconCache[category.iconId] = this.icon.getEntity(category.iconId)?.icon;
+    }
+    return this.iconCache[category.iconId];
   }
 
   public addItem() {
