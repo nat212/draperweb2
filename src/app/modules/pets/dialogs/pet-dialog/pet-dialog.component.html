@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>{{ editMode ? 'Edit' : 'Create' }} {{ editMode ? petName : 'Pet' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="petForm" fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-form-field>
+      <mat-label>Name *</mat-label>
+      <input matInput type="text" name="pet-name" formControlName="name" />
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date of Birth *</mat-label>
+      <input matInput type="text" name="pet-dob" formControlName="dateOfBirth" [matDatepicker]="dobPicker" (focus)="dobPicker.open()" />
+      <mat-datepicker #dobPicker></mat-datepicker>
+      <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+      <mat-error>Date of birth is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Sex *</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option value="M">Male</mat-option>
+        <mat-option value="F">Female</mat-option>
+      </mat-select>
+      <mat-error>Sex is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Breed *</mat-label>
+      <input matInput type="text" name="pet-breed" formControlName="breed">
+      <mat-error>Breed is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Class (Refer to BDG)</mat-label>
+      <input matInput type="text" name="pet-class" formControlName="class">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date of Acquisition</mat-label>
+      <input matInput type="text" name="pet-doa" formControlName="dateOfAcquisition" [matDatepicker]="doaPicker">
+      <mat-datepicker #doaPicker></mat-datepicker>
+      <mat-datepicker-toggle matSuffix [for]="doaPicker"></mat-datepicker-toggle>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Biography</mat-label>
+      <textarea matInput name="pet-biography" formControlName="biography"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close type="button">Cancel</button>
+  <button mat-button color="primary" [mat-dialog-close]="petForm.value" [disabled]="petForm.invalid" type="button">Save</button>
+</div>

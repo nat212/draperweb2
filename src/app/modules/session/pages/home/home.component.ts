@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   public links: Link[] = [
     { icon: 'request_quote', title: 'Budgets', path: 'budgets' },
     { icon: 'card_giftcard', title: 'Wishlists', path: 'wishlists' },
+    { icon: 'pets', title: 'Pets', path: 'pets' },
   ];
 
   public breadcrumbs$: BehaviorSubject<Crumb[]>;

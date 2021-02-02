@@ -28,6 +28,11 @@ const routes: Routes = [
         loadChildren: () => import('@modules/settings/settings.module').then((m) => m.SettingsModule),
         data: { breadcrumb: 'Settings', title: 'Settings' },
       },
+      {
+        path: 'pets',
+        loadChildren: () => import('@modules/pets/pets.module').then((m) => m.PetsModule),
+        data: { breadcrumb: 'Pets', title: 'Pets' },
+      },
     ],
   },
 ];
