@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Pet } from '@modules/pets/state/pet/pet.model';
 import { classToPlain } from 'class-transformer';
-import { Interface } from 'readline';
 
 interface PetDialogData {
   pet?: Pet;
