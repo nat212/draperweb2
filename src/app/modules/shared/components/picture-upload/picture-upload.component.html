@@ -1,0 +1,35 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 mat-dialog-title fxFlex="1 1 auto">Upload Picture</h1>
+  <button mat-icon-button mat-dialog-close style="margin-bottom: 16px">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <div class="video-container">
+    <webcam
+      *ngIf="!imageSet"
+      [trigger]="capture$"
+      [allowCameraSwitch]="true"
+      [switchCamera]="switchCamera$"
+      imageType="image/jpeg"
+      (imageCapture)="onCapture($event)"
+      [width]="imageWidth"
+    ></webcam>
+    <input type="file" (change)="uploadFile($event)" fxHide #fileInput accept="image/*" />
+    <img [ngStyle]="{ width: imageWidth + 'px' }" *ngIf="imageSet" [src]="image" />
+    <div class="progress" fxLayout="column" fxLayout="start stretch" *ngIf="uploading">
+      <h2>Uploading Image</h2>
+      <mat-progress-bar [value]="uploadProgress$ | async" color="accent"></mat-progress-bar>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around">
+  <ng-container *ngIf="!imageSet; else finishButtons">
+    <button mat-raised-button color="primary" (click)="fileInput.click()">Upload</button>
+    <button mat-raised-button color="primary" (click)="capture$.next()">Take Picture</button>
+  </ng-container>
+  <ng-template #finishButtons>
+    <button mat-raised-button color="warn" (click)="clearImage()">Clear</button>
+    <button mat-raised-button color="accent" (click)="submit()">Save</button>
+  </ng-template>
+</div>

@@ -21,11 +21,11 @@ export class PetDialogComponent implements OnInit {
   ngOnInit(): void {
     this.petForm = this.formBuilder.group({
       name: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
+      dateOfBirth: [null, Validators.required],
       sex: ['', Validators.required],
       breed: ['', Validators.required],
       class: [''],
-      dateOfAcquisition: [''],
+      dateOfAcquisition: [null],
       biography: [''],
     });
     if (this.data?.pet) {

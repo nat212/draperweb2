@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "setup-user": "tsc ./scripts/emulator-admin-firebase.ts && node ./scripts/setup-user.js",
-    "emulators:start": "firebase emulators:start --import ./firebase-data --export-on-exit"
+    "emulators:start": "firebase emulators:start --import ./firebase-data --export-on-exit",
+    "deploy": "firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "firebase": "^8.1.2",
     "fuse.js": "^6.4.3",
     "immutable": "^4.0.0-rc.12",
+    "ngx-webcam": "^0.3.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

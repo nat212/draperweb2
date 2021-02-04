@@ -1,26 +1,72 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-		{
-			"type": "npm",
-			"script": "start",
-			"problemMatcher": [],
-			"label": "npm: start",
-			"detail": "ng serve"
-		},
-		{
-			"type": "npm",
-			"script": "emulators:start",
-			"label": "Start Firebase Emulators",
-			"detail": "firebase emulators:start",
-			"problemMatcher": []
-		},
-		{
-			"type": "npm",
-			"script": "setup-user",
-			"problemMatcher": [],
-			"label": "npm: setup-user",
-			"detail": "tsc ./scripts/emulator-admin-firebase.ts && node ./scripts/setup-user.js"
-		}
-	]
+    {
+      "type": "npm",
+      "script": "start",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "base": "$tsc-watch",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "ng serve",
+            "endsPattern": ".* Compiled successfully"
+          }
+        }
+      ],
+      "label": "npm:start",
+      "detail": "ng serve",
+      "dependsOn": [
+        "npm:emulators:start"
+      ]
+    },
+    {
+      "type": "npm",
+      "script": "emulators:start",
+      "label": "npm:emulators:start",
+      "detail": "firebase emulators:start",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": "Error",
+              "file": 0,
+              "message": 0,
+              "location": 0
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "emulators: Starting emulators",
+            "endsPattern": "All emulators ready!"
+          }
+        }
+      ]
+    },
+    {
+      "type": "npm",
+      "script": "setup-user",
+      "problemMatcher": [],
+      "label": "npm: setup-user",
+      "detail": "tsc ./scripts/emulator-admin-firebase.ts && node ./scripts/setup-user.js"
+    },
+    {
+      "type": "npm",
+      "script": "build:prod",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm:build:prod",
+      "detail": "ng build --prod"
+    },
+    {
+      "type": "npm",
+      "script": "deploy",
+      "problemMatcher": [],
+      "label": "npm:deploy",
+      "detail": "firebase deploy",
+      "dependsOn": ["npm:build:prod"]
+    }
+  ]
 }
