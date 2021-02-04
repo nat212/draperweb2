@@ -2,16 +2,16 @@
   class="page"
   gdRows="auto!"
   gdColumns="auto"
-  gdColumns.gt-sm="repeat(2, 1fr)"
-  gdColumns.gt-md="repeat(3, 1fr)"
-  gdColumns.gt-lg="repeat(4, 1fr)"
+  gdColumns.gt-xs="repeat(2, 1fr)"
+  gdColumns.gt-sm="repeat(3, 1fr)"
+  gdColumns.gt-md="repeat(4, 1fr"
+  gdColumns.gt-lg="repeat(5, 1fr)"
   gdGap="16px"
 >
-  <mat-card class="pet" *ngFor="let pet of pets$ | async">
+  <mat-card class="pet" *ngFor="let pet of pets$ | async" fxLayout="column">
     <mat-card-header class="header">
       <mat-card-title>
         {{ pet.name }}
-
       </mat-card-title>
       <mat-card-subtitle>
         <span *ngIf="pet.breed">
@@ -28,7 +28,7 @@
         </mat-icon>
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-card-content fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" fxFlex="1 1 auto">
       <div class="img-container">
         <img
           (click)="uploadImage(pet)"
@@ -40,7 +40,39 @@
           <mat-icon>photo_camera</mat-icon>
         </div>
       </div>
+      <div class="pet-details">
+        <span class="overline">Details</span>
+        <mat-divider [inset]="true" style="margin-bottom: 4px"></mat-divider>
+        <p>
+          <b>Acquired:</b>
+          <span *ngIf="pet.dateOfAcquisition; else dateUnknown">
+            {{ pet.dateOfAcquisition | date: 'mediumDate' }}
+          </span>
+          <ng-template #dateUnknown>
+            <span>
+              Unknown
+            </span>
+          </ng-template>
+        </p>
+        <p>
+          <b>Born:</b>
+          <span>
+            {{ pet.dateOfBirth | date: 'mediumDate' }}
+            ({{ pet.age }} years old)
+          </span>
+        </p>
+        <span class="overline">Biography</span>
+        <mat-divider [inset]="true" style="margin-bottom: 4px"></mat-divider>
+        <p class="biography">
+          {{ pet.biography }}
+        </p>
+      </div>
     </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button type="button" (click)="editPet(pet)">
+        Edit
+      </button>
+    </mat-card-actions>
   </mat-card>
 </div>
 

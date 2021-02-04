@@ -31,7 +31,8 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles/"]
-            }
+            },
+            "allowedCommonJsDependencies": ["class-transformer"]
           },
           "configurations": {
             "production": {

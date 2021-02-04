@@ -47,7 +47,7 @@ export class PetsComponent implements OnInit {
 
   editPet(pet: Pet) {
     this.dialog
-      .open(PetDialogComponent)
+      .open(PetDialogComponent, { data: { pet } })
       .afterClosed()
       .pipe(filter((value) => !!value))
       .subscribe((value) => {
