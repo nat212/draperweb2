@@ -3,10 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { PictureUploadComponent } from '@modules/shared/components/picture-upload/picture-upload.component';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { PetDialogComponent } from './dialogs/pet-dialog/pet-dialog.component';
-import { Pet } from './state/pet/pet.model';
-import { PetQuery } from './state/pet/pet.query';
-import { PetService } from './state/pet/pet.service';
+import { PetDialogComponent } from '@modules/pets/dialogs/pet-dialog/pet-dialog.component';
+import { Pet } from '@modules/pets/state/pet/pet.model';
+import { PetQuery } from '@modules/pets/state/pet/pet.query';
+import { PetService } from '@modules/pets/state/pet/pet.service';
 
 @Component({
   selector: 'dw-pets',
