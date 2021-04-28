@@ -17,8 +17,8 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRAPERWEB_2 }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRAPERWEB_1414D }}'
           channelId: live
-          projectId: draperweb-2
+          projectId: draperweb-1414d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
