@@ -1,14 +1,14 @@
 {
   "targets": {
-    "draperweb-2": {
+    "draperweb-1414d": {
       "hosting": {
-        "draperweb2": [
-          "draperweb-2"
+        "draperweb": [
+          "draperweb-1414d"
         ]
       }
     }
   },
   "projects": {
-    "default": "draperweb-2"
+    "default": "draperweb-1414d"
   }
 }
